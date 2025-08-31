@@ -2,9 +2,11 @@
     <!-- Content of your webpage -->
 </body>
 
+<div class="my-box">
 
+</div>
 
-<form method="post">
+<form method="post" autocomplete="off">
     {%csrf_token%}
     {{form}}
 </form>
@@ -12,7 +14,16 @@
 <!-- styles relating to forms are directly written in their form class -->
 
 <style>
-    form{
-        border-style: none
+    .my-box {
+        width: 740px; 
+        height: 75px; 
+        background-color: white; 
+        border: 2px solid gray; 
+        top: 49.5%;
+        left: 49.5%;
+        margin-left: -369px;
+        margin-top: -37.5px;
+        position: absolute; 
+        border-radius: 100px;
     }
 </style>

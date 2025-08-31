@@ -20,6 +20,9 @@ class search_form(forms.ModelForm):
                 position: absolute;
                 border-style: none;
                 outline: none;
+                background: transparent;
+                border-radius: 100px;
+                
                 """,
             }
         )

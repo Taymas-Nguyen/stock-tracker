@@ -1,1 +1,18 @@
-<h1> print </h1>
+<body style="background-color: pink;">
+    <!-- Content of your webpage -->
+</body>
+
+
+
+<form method="post">
+    {%csrf_token%}
+    {{form}}
+</form>
+
+<!-- styles relating to forms are directly written in their form class -->
+
+<style>
+    form{
+        border-style: none
+    }
+</style>

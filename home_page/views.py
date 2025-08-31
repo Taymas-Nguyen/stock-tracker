@@ -1,6 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .forms import search_form
 
 def home_page(request):
-    print("AASD")
-    return render(request, "home_page.html")
+    form = search_form()
+    # when user searches for query and presses enter
+    if request.method == "POST":
+        form = search_form(request.POST)
+        if form.is_valid():
+            print(request.POST['ticker'])
+    context = {'form': form}
+    return render(request, "home_page.html", context)  

@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import search_form
 
-def home_page(request):
+def data_page(request):
     form = search_form()
     # when user searches for query and presses enter
     if request.method == "POST":
@@ -11,7 +11,7 @@ def home_page(request):
             print(request.POST['ticker'])
             
             
-        return render(request, "data_page.html")
+        return render(request, "data_page")
             
     context = {'form': form}
     return render(request, "home_page.html", context)  

@@ -14,7 +14,7 @@ class search_form(forms.ModelForm):
                 # equivalent to css styling except for forms
                 'style': """
                 font-size: 30; 
-                margin-left: 10px;
+                margin-left: 20px;
                 pointer-event: none;
                 position: absolute;
                 border-style: none;

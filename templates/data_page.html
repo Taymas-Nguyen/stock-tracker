@@ -1,1 +1,38 @@
-<h1> redir </h1>
+<div class="header_background">
+    <form method="post" autocomplete="off">
+        <div class="search_box_background"></div>
+        {%csrf_token%}
+        {{form}}
+    </form>
+</div>
+
+<!-- styles relating to forms are directly written in their form class -->
+
+<style>
+    .search_box_background {
+        width: 350px; 
+        height: 30px; 
+        background-color: white; 
+        border: 2px solid gray; 
+        position: absolute; 
+        border-radius: 100px;
+          overflow-y: auto;
+
+        
+    }
+    .header_background {
+        height: 40px; 
+        padding-top: 10px;
+        background-color: rgba(233, 182, 221, 1);
+        position: sticky;
+        top: 0;
+
+    }
+    body{
+        background-color: pink;
+        padding-top: 20px;
+        margin:0;
+        padding:0;
+
+    }
+</style>

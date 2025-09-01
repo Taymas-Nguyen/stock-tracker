@@ -1,6 +1,8 @@
 from django import forms
 from .models import search_model
 
+
+# search bar for ticker in home_page located in the middle of the screen
 class search_form(forms.ModelForm):
     ticker = forms.CharField(
         label = '',

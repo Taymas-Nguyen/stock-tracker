@@ -4,9 +4,8 @@ from .forms import search_form
 
 def data_page(request):
     form = search_form()
-    # when user searches for query and presses enter
     context = {'form': form}
     # retrieve information from session
     ticker = request.session['ticker'] 
-    print(ticker)
+    print(ticker)    
     return render(request, "data_page.html", context)

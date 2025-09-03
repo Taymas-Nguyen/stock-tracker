@@ -1,13 +1,22 @@
+{% load static %}
+
+<body> 
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src= "{% static 'visualize.js' %}"></script>
+    <h1> hello </h1>
+    
+</body>
+
 <div class="header_background">
     <form method="post" autocomplete="off">
         <div class="search_box_background"></div>
-        {%csrf_token%}
+        {%csrf_token%} 
         {{form}}
     </form>
 </div>
 
 <!-- styles relating to forms are directly written in their form class -->
-
+ 
 <style>
     .search_box_background {
         width: 350px; 

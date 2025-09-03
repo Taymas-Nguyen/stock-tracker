@@ -8,7 +8,7 @@ class search_form(forms.ModelForm):
         label = '',
         widget = forms.TextInput(
             attrs = {
-                'placeholder' : 'Enter ticker ($aapl, appl)',
+                'placeholder' : 'Enter ticker ($aapl, aapl)',
                 'cols': 20, 
                 'rows': 1,
                 # equivalent to css styling except for forms
@@ -17,7 +17,7 @@ class search_form(forms.ModelForm):
                 pointer-event: none;
                 top: 50%;
                 left: 50%;
-                margin-left: -369px;
+                margin-left: -360px;
                 margin-top: -37.5px;
                 position: absolute;
                 border-style: none;

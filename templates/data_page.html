@@ -1,11 +1,5 @@
 {% load static %}
 
-<body> 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src= "{% static 'visualize.js' %}"></script>
-    <h1> hello </h1>
-    
-</body>
 
 <div class="header_background">
     <form method="post" autocomplete="off">
@@ -14,6 +8,12 @@
         {{form}}
     </form>
 </div>
+
+<body>
+    <h1 id = "id1"> hello </h1>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src= "{% static '\visualize.js' %}"></script>
+</body>
 
 <!-- styles relating to forms are directly written in their form class -->
  

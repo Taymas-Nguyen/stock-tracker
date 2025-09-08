@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home_page.urls')),
     path('data_page/', include('data_page.urls')),
+    path('csv_page/', include('csv_page.urls')), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

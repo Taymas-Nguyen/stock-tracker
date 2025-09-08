@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home_page', 
     'data_page',
-    'static',
+    'static', 
+    'yahoo',
+    'csv_page', 
 ]
 
 MIDDLEWARE = [
@@ -121,9 +123,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-        BASE_DIR / 'static',
     ]
-
+STATIC_ROOT = BASE_DIR / 'static'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

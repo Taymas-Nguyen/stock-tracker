@@ -5,8 +5,9 @@ from data_page.views import data_page
 
 def home_page(request):    
     form = search_form()
-    # when user searches for query and presses enter
     context = {'form': form}
+
+    # when user searches for query and presses enter
     if request.method == "POST":
         form = search_form(request.POST)
             

@@ -7,10 +7,37 @@
         {%csrf_token%} 
         {{form}}
     </form>
+    <div id = "range_buttons">  
+        <div>
+            <button id="1 Day" >1 Day</button>
+        </div>
+        <div>   
+            <button id="5 Days">5 Days</button>
+        </div>
+        <div>      
+            <button id="1 Month">1 Month</button>
+        </div>
+        <div>      
+            <button id="6 Months">6 Months</button>
+        </div>
+        <div>      
+            <button id="Year to Date">Year to Date</button>
+        </div>
+        <div>      
+            <button id="1 Year">1 Year</button>
+        </div>
+        <div>      
+            <button id="5 Years">5 Years</button>
+        </div>
+        <div>      
+            <button id="Max">Max</button>
+        </div>
+        <script src= "{% static '\data_page.js' %}"></script>
+    </div>
 </div>
 
 <body>
-    <h1 id = "line_graph"> asd </h1>
+    <h1 id = "line_graph"> </h1>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src= "{% static '\visualize.js' %}"></script>
 </body>
@@ -43,6 +70,15 @@
         padding-top: 20px;
         margin:0;
         padding:0;
-
     }
+
+    #range_buttons {
+        margin-left: 950px;
+        margin-top: 80px;
+        color: red;
+    }
+    #Max {
+        background-color: red;
+    }
+
 </style>

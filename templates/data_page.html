@@ -1,4 +1,5 @@
 {% load static %}
+<script src= "{% static '\jquery-3.7.1.js' %}"></script>
 
 
 <div class="header_background">
@@ -7,41 +8,40 @@
         {%csrf_token%} 
         {{form}}
     </form>
+</div id = "button_and_graph">
     <div id = "range_buttons">  
         <div>
-            <button id="1 Day" >1 Day</button>
+            <button onclick= "getRange(this)" id="1 Day" >1 Day</button>
         </div>
         <div>   
-            <button id="5 Days">5 Days</button>
+            <button onclick= "getRange(this)" id="5 Days">5 Days</button>
         </div>
         <div>      
-            <button id="1 Month">1 Month</button>
+            <button onclick= "getRange(this)" id="1 Month">1 Month</button>
         </div>
         <div>      
-            <button id="6 Months">6 Months</button>
+            <button onclick= "getRange(this)" id="6 Months">6 Months</button>
         </div>
         <div>      
-            <button id="Year to Date">Year to Date</button>
+            <button onclick= "getRange(this)" id="Year to Date">Year to Date</button>
         </div>
         <div>      
-            <button id="1 Year">1 Year</button>
+            <button onclick= "getRange(this)" id="1 Year">1 Year</button>
         </div>
         <div>      
-            <button id="5 Years">5 Years</button>
+            <button onclick= "getRange(this)" id="5 Years">5 Years</button>
         </div>
         <div>      
-            <button id="Max">Max</button>
+            <button onclick= "getRange(this)" id="Max">Max</button>
         </div>
         <script src= "{% static '\data_page.js' %}"></script>
+        </div>
+        <h1 id = "line_graph"> </h1>
+            <script src="https://d3js.org/d3.v7.min.js"></script>
+            <script src= "{% static '\visualize.js' %}"></script>
+        </div>
     </div>
-</div>
-
-<body>
-    <h1 id = "line_graph"> </h1>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src= "{% static '\visualize.js' %}"></script>
-</body>
-
+        
 <!-- styles relating to forms are directly written in their form class -->
  
 <style>
@@ -73,12 +73,13 @@
     }
 
     #range_buttons {
-        margin-left: 950px;
+        margin-left: 1150px;
         margin-top: 80px;
         color: red;
     }
-    #Max {
-        background-color: red;
+
+    #line_graph {
+        margin-top: -200px;
     }
 
 </style>

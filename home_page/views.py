@@ -13,7 +13,6 @@ def home_page(request):
             
         # go to data page when ticker is submitted
         # all information in request is stored in session
-        # TODO verify ticker exists
         request.session['ticker'] =  request.POST['ticker']    
         return redirect("/data_page/")
             

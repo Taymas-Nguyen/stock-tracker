@@ -1,21 +1,28 @@
+function drawLine(color){
+var line = 0;
 // set the dimensions and margins of the graph
 const margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 960 - margin.left - margin.right,
+    width = 1150 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 const svg = d3.select("#line_graph")
   .append("svg")
+    .attr("id", "svgid")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
-
+    .attr("transform", `translate(${margin.left},${margin.top})`);  
 //Read the data
 d3.csv("../csv_page",
 
   function(d){
+    // line count determines how many lines of csv_page is shown
+    // todo: show csv lines based on range
+    // todo: change time format based on ranges
+    line += 1;
     return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+    
   }).then(
 
   function(data) {
@@ -26,7 +33,8 @@ d3.csv("../csv_page",
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b %d"))); // time format 
+
 
     // Add Y axis
     const y = d3.scaleLinear()
@@ -39,7 +47,7 @@ d3.csv("../csv_page",
     svg.append("path")
       .datum(data)
       .attr("fill", "none")
-      .attr("stroke", "steelblue")
+      .attr("stroke", color)
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
         .x(function(d) { return x(d.date) })
@@ -47,3 +55,9 @@ d3.csv("../csv_page",
         )
 
 })
+
+}
+
+function remove(){
+  const a = d3.select("#svgid").remove();
+}

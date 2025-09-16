@@ -21,8 +21,10 @@ d3.csv("../csv_page",
     // todo: show csv lines based on range
     // todo: change time format based on ranges
     line += 1;
-    return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
-    
+    if (line < 500){
+      console.log(d3.timeParse("%Y-%m-%d %H:%M:%S")(d.date));
+      return { date : d3.timeParse("%Y-%m-%d %H:%M:%S")(d.date), value : d.value }
+    }
   }).then(
 
   function(data) {
@@ -33,7 +35,7 @@ d3.csv("../csv_page",
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%b %d"))); // time format 
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y %b %d"))); // time format 
 
 
     // Add Y axis

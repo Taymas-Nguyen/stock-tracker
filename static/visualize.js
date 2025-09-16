@@ -22,7 +22,6 @@ d3.csv("../csv_page",
     // todo: change time format based on ranges
     line += 1;
     if (line < 500){
-      console.log(d3.timeParse("%Y-%m-%d %H:%M:%S")(d.date));
       return { date : d3.timeParse("%Y-%m-%d %H:%M:%S")(d.date), value : d.value }
     }
   }).then(

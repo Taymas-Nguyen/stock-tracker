@@ -32,7 +32,7 @@ def get_info(ticker_name):
     max_close = [i[0].item() for i in list(max_hist.Close.values)]
     minute_close = [i[0].item() for i in list(minute_hist.Close.values)]
 
-    # time format for minute interval is yy-mm-dd HH-MM-SS+time zone
+    # time format for minute interval is yy-mm-dd HH-MM-SS+time zone utc-0
     # time format for max interval is just yy-mm-dd
     # convert all timezones to california/pdt
     # cut off time zone from format
@@ -51,6 +51,6 @@ def get_info(ticker_name):
     # add data from all of minute interval
     for i,j in zip(minute_dates,minute_close):
         data.append([i,j])
-        
+
     return data 
 

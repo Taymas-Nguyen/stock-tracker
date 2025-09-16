@@ -3,11 +3,11 @@ from django.shortcuts import render, redirect
 import csv
 from io import StringIO
 from yahoo import get_info
-def csv_page(request):  
+def csv_page_max(request):
 
     # get data from yahoo.py and turn into csv in this views  
 
-    data = get_info(request.session['ticker']) 
+    data = get_info(request.session['ticker'])[0] 
 
     output = StringIO()
     writer = csv.writer(output)
@@ -17,4 +17,4 @@ def csv_page(request):
 
     csv_page = output.getvalue()
 
-    return HttpResponse(csv_page, content_type='text/plain')   
+    return HttpResponse(csv_page, content_type='text/plain')

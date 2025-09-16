@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'data_page',
     'static', 
     'yahoo',
-    'csv_page', 
+    'csv_page_max', 
+    'csv_page_minute', 
 ]
 
 MIDDLEWARE = [

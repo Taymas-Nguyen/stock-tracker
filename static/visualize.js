@@ -14,16 +14,15 @@ const svg = d3.select("#line_graph")
   .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);  
 //Read the data
-d3.csv("../csv_page",
+d3.csv("../csv_page_max",
 
   function(d){
     // line count determines how many lines of csv_page is shown
     // todo: show csv lines based on range
     // todo: change time format based on ranges
     line += 1;
-    if (line < 500){
       return { date : d3.timeParse("%Y-%m-%d %H:%M:%S")(d.date), value : d.value }
-    }
+    
   }).then(
 
   function(data) {

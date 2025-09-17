@@ -27,19 +27,24 @@ function getRange(element, ticker_name) {
     }
     document.getElementById('loading_graph').style.display = 'inline';
     removeSVG();
-    drawLine('red', element.id);
-    for( i=0; i< childDivs.length; i++ )
-    {
-        if (childDivs[i].id == element.id){
-            childDivs[i].style.backgroundColor = 'yellow';
-        }
-        else{
-            childDivs[i].style.backgroundColor = 'transparent';
-        }
-    }
-    document.getElementById('loading_graph').style.display = 'none';
-    for( i=0; i< childDivs.length; i++ )
-    {
-        childDivs[i].disabled = false;
-    }
+    $.ajax({
+        type: "GET",
+        success: function() {
+            drawLine('red', element.id);
+            for( i=0; i< childDivs.length; i++ )
+            {
+                if (childDivs[i].id == element.id){
+                    childDivs[i].style.backgroundColor = 'yellow';
+                }
+                else{
+                    childDivs[i].style.backgroundColor = 'transparent';
+                }
+            }
+            document.getElementById('loading_graph').style.display = 'none';
+            for( i=0; i< childDivs.length; i++ )
+            {
+                childDivs[i].disabled = false;
+            }
+        },
+    });
 }

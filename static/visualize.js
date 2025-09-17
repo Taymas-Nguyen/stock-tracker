@@ -1,20 +1,23 @@
 function drawLine(color, range){
 var csv_page;
-var time_format;
+var time_format = "%Y %b";
 
 var past_date = new Date();
-
+// 5 days shows 7 days, this is intended
 if (range == "1 Day"){
   csv_page = "../csv_page_minute";
   past_date.setDate(past_date.getDate() - 1)
+  time_format = "%b %d %H:%M";
 }
 if (range == "5 Days"){
   csv_page = "../csv_page_minute";
   past_date.setDate(past_date.getDate() - 7)
+  time_format = "%b %d %H:%M";
 }
 if (range == "1 Month"){
   csv_page = "../csv_page_max";
-  past_date.setDate(past_date.getDate() - 30)
+  past_date.setDate(past_date.getDate() - 31)
+  time_format = "%b";
 }
 if (range == "6 Months"){
   csv_page = "../csv_page_max";
@@ -69,7 +72,7 @@ d3.csv(csv_page,
       .range([ 0, width ]);
     svg.append("g")
       .attr("transform", `translate(0, ${height})`)
-      .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y %b %d"))); // time format 
+      .call(d3.axisBottom(x).tickFormat(d3.timeFormat(time_format))); // time format 
 
     // Add Y axis
     const y = d3.scaleLinear()

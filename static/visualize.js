@@ -58,6 +58,6 @@ d3.csv("../csv_page_max",
 
 }
 
-function remove(){
+function removeSVG(){
   const a = d3.select("#svgid").remove();
 }

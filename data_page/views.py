@@ -13,6 +13,8 @@ def data_page(request):
     if request.method == "POST":
         request.session['ticker'] =  request.POST['ticker']    
 
+    context['ticker_name'] = request.session['ticker']
+
     csv_page_max(request)
     csv_page_minute(request)
  

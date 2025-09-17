@@ -11,28 +11,28 @@
 </div id = "button_and_graph">
     <div id = "range_buttons">  
         <div>
-            <button onclick= "getRange(this)" id="1 Day" >1 Day</button>
+            <button onclick= 'getRange(this, "{{ticker_name}}" )' id="1 Day" >1 Day</button>
         </div>
         <div>   
-            <button onclick= "getRange(this)" id="5 Days">5 Days</button>
+            <button onclick= 'getRange(this, "{{ticker_name}}" )' id="5 Days">5 Days</button>
         </div>
         <div>      
-            <button onclick= "getRange(this)" id="1 Month">1 Month</button>
+            <button onclick= 'getRange(this, "{{ticker_name}}" )' id="1 Month">1 Month</button>
         </div>
         <div>      
-            <button onclick= "getRange(this)" id="6 Months">6 Months</button>
+            <button onclick= 'getRange(this, "{{ticker_name}}" )' id="6 Months">6 Months</button>
         </div>
         <div>      
-            <button onclick= "getRange(this)" id="Year to Date">Year to Date</button>
+            <button onclick= 'getRange(this, "{{ticker_name}}" )' id="Year to Date">Year to Date</button>
         </div>
         <div>      
-            <button onclick= "getRange(this)" id="1 Year">1 Year</button>
+            <button onclick= 'getRange(this, "{{ticker_name}}" )' id="1 Year">1 Year</button>
         </div>
         <div>      
-            <button onclick= "getRange(this)" id="5 Years">5 Years</button>
+            <button onclick= 'getRange(this, "{{ticker_name}}" )' id="5 Years">5 Years</button>
         </div>
         <div>      
-            <button onclick= "getRange(this)" id="Max">Max</button>
+            <button onclick= 'getRange(this, "{{ticker_name}}" )' id="Max">Max</button>
         </div>
         <script src= "{% static '\data_page.js' %}"></script>
         </div>

@@ -19,10 +19,13 @@ for( i=0; i< childDivs.length; i++ )
     }
 }
 
-function getRange(element) {
-    console.log(element.id);
+function getRange(element, ticker_name) {
+    console.log(ticker_name)
     $.ajax({
         type: "GET",
+        beforeSend: function(){
+            removeSVG();
+        },
         success: function() {
             for( i=0; i< childDivs.length; i++ )
             {
@@ -33,8 +36,8 @@ function getRange(element) {
                     childDivs[i].style.backgroundColor = 'transparent';
                 }
             }
-            remove();
+            removeSVG();
             drawLine('red');
-        }
+        },
     });
 }

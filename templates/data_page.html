@@ -36,7 +36,11 @@
         </div>
         <script src= "{% static '\data_page.js' %}"></script>
         </div>
-        <h1 id = "line_graph"> </h1>
+        <div>
+            <h1 id = "line_graph"> </h1>
+            <div id = "loading_graph">   
+                <h1 id = "loading_words">  Loading ... {{ticker_name}} ...  </h1>
+            </div>
             <script src="https://d3js.org/d3.v7.min.js"></script>
             <script src= "{% static '\visualize.js' %}"></script>
         </div>
@@ -80,6 +84,24 @@
 
     #line_graph {
         margin-top: -200px;
+        position: absolute
+    }
+
+    #loading_graph{
+        background-color: black;
+        width: 1120;
+        height: 400;
+        margin-left: 25px;
+        margin-top: -200px;
+        position: absolute;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 400px; 
+        display: "none";
+    }
+
+    #loading_words{
+        color: white;
     }
 
 </style>

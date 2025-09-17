@@ -1,6 +1,7 @@
-// on page load, grapg default max range from visualize.js
+// on page load, graph default max range from visualize.js
 document.addEventListener('DOMContentLoaded', function() {
     drawLine("steelblue");
+    document.getElementById('loading_graph').style.display = 'none';
 });
 
 const cvs = "C:/Users/tinko/School/Stock Tracker/stock-tracker-1/csv_page/views.py";
@@ -20,12 +21,15 @@ for( i=0; i< childDivs.length; i++ )
 }
 
 function getRange(element, ticker_name) {
-    console.log(ticker_name)
+    console.log('press');
+    for( i=0; i< childDivs.length; i++ )
+    {
+        childDivs[i].disabled = true;
+    }
+    document.getElementById('loading_graph').style.display = 'inline';
+    removeSVG();
     $.ajax({
         type: "GET",
-        beforeSend: function(){
-            removeSVG();
-        },
         success: function() {
             for( i=0; i< childDivs.length; i++ )
             {
@@ -36,8 +40,13 @@ function getRange(element, ticker_name) {
                     childDivs[i].style.backgroundColor = 'transparent';
                 }
             }
-            removeSVG();
             drawLine('red');
+            document.getElementById('loading_graph').style.display = 'none';
+            for( i=0; i< childDivs.length; i++ )
+            {
+                console.log('enable');
+                childDivs[i].disabled = false;
+            }
         },
     });
 }

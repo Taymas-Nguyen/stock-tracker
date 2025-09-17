@@ -13,8 +13,8 @@ def get_info(ticker_name):
     original_timezone = "UTC"
     target_timezone = "America/Los_Angeles" # pdt
 
-    max_close = [i[0].item() for i in list(max_hist.Close.values)]
-    minute_close = [i[0].item() for i in list(minute_hist.Close.values)]
+    max_close = [i[0].item() for i in list(max_hist.High.values)]
+    minute_close = [i[0].item() for i in list(minute_hist.High.values)]
 
     # time format for minute interval is yy-mm-dd HH-MM-SS+time zone utc-0
     # time format for max interval is just yy-mm-dd

@@ -1,5 +1,42 @@
-function drawLine(color){
-var line = 0;
+function drawLine(color, range){
+var csv_page;
+var time_format;
+
+var past_date = new Date();
+
+if (range == "1 Day"){
+  csv_page = "../csv_page_minute";
+  past_date.setDate(past_date.getDate() - 1)
+}
+if (range == "5 Days"){
+  csv_page = "../csv_page_minute";
+  past_date.setDate(past_date.getDate() - 7)
+}
+if (range == "1 Month"){
+  csv_page = "../csv_page_max";
+  past_date.setDate(past_date.getDate() - 30)
+}
+if (range == "6 Months"){
+  csv_page = "../csv_page_max";
+  past_date.setDate(past_date.getDate() - 185)
+}
+if (range == "Year to Date"){
+  csv_page = "../csv_page_max";
+  past_date = new Date(new Date().getFullYear(), 0, 1);
+
+}
+if (range == "1 Year"){
+  csv_page = "../csv_page_max";
+  past_date.setDate(past_date.getDate() - 366)
+}
+if (range == "5 Years"){
+  csv_page = "../csv_page_max";
+  past_date.setDate(past_date.getDate() - 366*5)
+}
+if (range == "Max"){
+  csv_page = "../csv_page_max";
+}
+
 // set the dimensions and margins of the graph
 const margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 1150 - margin.left - margin.right,
@@ -14,15 +51,14 @@ const svg = d3.select("#line_graph")
   .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);  
 //Read the data
-d3.csv("../csv_page_max",
+d3.csv(csv_page,
 
   function(d){
-    // line count determines how many lines of csv_page is shown
-    // todo: show csv lines based on range
     // todo: change time format based on ranges
-    line += 1;
+    data_date = new Date(d.date)
+    if (data_date > past_date || range == "Max"){
       return { date : d3.timeParse("%Y-%m-%d %H:%M:%S")(d.date), value : d.value }
-    
+    }
   }).then(
 
   function(data) {
@@ -35,10 +71,9 @@ d3.csv("../csv_page_max",
       .attr("transform", `translate(0, ${height})`)
       .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y %b %d"))); // time format 
 
-
     // Add Y axis
     const y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.value; })])
+      .domain([d3.min(data, function(d) { return +d.value; }), d3.max(data, function(d) { return +d.value; })])
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));

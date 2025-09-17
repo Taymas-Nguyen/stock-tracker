@@ -1,6 +1,6 @@
 // on page load, graph default max range from visualize.js
 document.addEventListener('DOMContentLoaded', function() {
-    drawLine("steelblue");
+    drawLine("steelblue", "Max");
     document.getElementById('loading_graph').style.display = 'none';
 });
 
@@ -21,32 +21,25 @@ for( i=0; i< childDivs.length; i++ )
 }
 
 function getRange(element, ticker_name) {
-    console.log('press');
     for( i=0; i< childDivs.length; i++ )
     {
         childDivs[i].disabled = true;
     }
     document.getElementById('loading_graph').style.display = 'inline';
     removeSVG();
-    $.ajax({
-        type: "GET",
-        success: function() {
-            for( i=0; i< childDivs.length; i++ )
-            {
-                if (childDivs[i].id == element.id){
-                    childDivs[i].style.backgroundColor = 'yellow';
-                }
-                else{
-                    childDivs[i].style.backgroundColor = 'transparent';
-                }
-            }
-            drawLine('red');
-            document.getElementById('loading_graph').style.display = 'none';
-            for( i=0; i< childDivs.length; i++ )
-            {
-                console.log('enable');
-                childDivs[i].disabled = false;
-            }
-        },
-    });
+    drawLine('red', element.id);
+    for( i=0; i< childDivs.length; i++ )
+    {
+        if (childDivs[i].id == element.id){
+            childDivs[i].style.backgroundColor = 'yellow';
+        }
+        else{
+            childDivs[i].style.backgroundColor = 'transparent';
+        }
+    }
+    document.getElementById('loading_graph').style.display = 'none';
+    for( i=0; i< childDivs.length; i++ )
+    {
+        childDivs[i].disabled = false;
+    }
 }

@@ -1,13 +1,13 @@
 {
     "builds": [{
-        "src": "stock_tracker/wsgi.py",
+        "src": "src/wsgi.py",
         "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.9", "distDir": "static" }
     }],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "stock_tracker/wsgi.py"
+            "dest": "src/wsgi.py"
         }
     ]
 }

@@ -9,6 +9,7 @@ python-decouple = "*"
 python-dotenv = "*"
 yfinance = "*"
 pymysql = "*"
+whitenoise = "*"
 
 [dev-packages]
 

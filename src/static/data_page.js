@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('loading_graph').style.display = 'none';
 });
 
-const cvs = "C:/Users/tinko/School/Stock Tracker/stock-tracker-1/csv_page/views.py";
-
 // array of all of range buttons
 var childDivs = document.getElementById('range_buttons').getElementsByTagName('button');
 

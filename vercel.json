@@ -6,7 +6,7 @@
     }],
     "routes": [
         {
-            "src": "/(.*)",
+            "src": "src/(.*)",
             "dest": "src/stock_tracker/wsgi.py"
         }
     ]

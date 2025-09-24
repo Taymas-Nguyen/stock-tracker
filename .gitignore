@@ -1,5 +1,3 @@
-SECRET_KEY.py
 .env
 __pycache__
-stock_tracker_schema
 .vscode

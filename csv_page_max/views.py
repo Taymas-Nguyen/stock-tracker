@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import csv
 from io import StringIO
-from yahoo import get_info
+from yahoo.yahoo import get_info
 def csv_page_max(request):
 
     # get data from yahoo.py and turn into csv in this views  

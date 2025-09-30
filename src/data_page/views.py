@@ -12,6 +12,12 @@ def data_page(request):
     form = search_form()
     context = {'form': form}
 
+    # if user searches for ticker via button in data_page
+    # else get ticker from home_page
+    if request.method == "POST":
+        request.session['ticker'] =  request.POST['ticker']    
+    context['ticker_name'] = request.session['ticker']
+
     # reset cache on refresh
     if request.method == 'POST':
         cache_stock_max.clear()
@@ -21,11 +27,6 @@ def data_page(request):
     if "ticker" not in request.POST:
         return render(request, "data_page.html", context)    
     
-    # if user searches for ticker via button in data_page
-    # else get ticker from home_page
-    if request.method == "POST":
-        request.session['ticker'] =  request.POST['ticker']    
-    context['ticker_name'] = request.session['ticker']
 
     csv_page_max(request)
     csv_page_minute(request)

@@ -1,6 +1,21 @@
 // on page load, graph default max range from visualize.js
 document.addEventListener('DOMContentLoaded', function() {
-    drawLine("steelblue", "Max");
+    for( i=0; i< childDivs.length; i++ )
+    {
+        childDivs[i].disabled = true;
+    }
+    document.getElementById('loading_graph').style.display = 'inline';
+    removeSVG();
+    for( i=0; i< childDivs.length; i++ )
+    {
+        if (childDivs[i].id == "Max"){
+            childDivs[i].style.backgroundColor = 'yellow';
+        }
+        else{
+            childDivs[i].style.backgroundColor = 'transparent';
+        }
+    }
+    drawLine('red', "Max", "changeRange");
 });
 
 // array of all of range buttons
@@ -18,20 +33,20 @@ for( i=0; i< childDivs.length; i++ )
 }
 
 function getRange(element, ticker_name) {
+    for( i=0; i< childDivs.length; i++ )
+    {
+        childDivs[i].disabled = true;
+    }
+    document.getElementById('loading_graph').style.display = 'inline';
     removeSVG();
-    $.ajax({
-        type: "GET",
-        success: function() {
-            drawLine('red', element.id, "changeRange");
-            for( i=0; i< childDivs.length; i++ )
-            {
-                if (childDivs[i].id == element.id){
-                    childDivs[i].style.backgroundColor = 'yellow';
-                }
-                else{
-                    childDivs[i].style.backgroundColor = 'transparent';
-                }
-            }
-        },
-    });
+    for( i=0; i< childDivs.length; i++ )
+    {
+        if (childDivs[i].id == element.id){
+            childDivs[i].style.backgroundColor = 'yellow';
+        }
+        else{
+            childDivs[i].style.backgroundColor = 'transparent';
+        }
+    }
+    drawLine('red', element.id, "changeRange");
 }

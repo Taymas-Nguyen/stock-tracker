@@ -1,10 +1,4 @@
 function drawLine(color, range, request_type){
-// when range is change, disable buttons and show loading screen
-for( i=0; i< childDivs.length; i++ )
-    {
-        childDivs[i].disabled = true;
-    }
-document.getElementById('loading_graph').style.display = 'inline';
 
 var csv_page;
 var time_format = "%Y %b";

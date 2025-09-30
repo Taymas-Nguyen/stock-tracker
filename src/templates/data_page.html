@@ -8,7 +8,8 @@
         {%csrf_token%} 
         {{form}}
     </form>
-</div id = "button_and_graph">
+</div>
+<div id = "button_and_graph">
     <div id = "range_buttons">  
         <div>
             <button onclick= 'getRange(this, "{{ticker_name}}" )' id="1 Day" >1 Day</button>
@@ -45,7 +46,7 @@
             <script src= "{% static '\visualize.js' %}"></script>
         </div>
     </div>
-        
+</div>
 <!-- styles relating to forms are directly written in their form class -->
  
 <style>

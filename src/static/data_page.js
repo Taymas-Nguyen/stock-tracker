@@ -28,7 +28,7 @@ function getRange(element, ticker_name) {
     $.ajax({
         type: "GET",
         success: function() {
-            drawLine('red', element.id);
+            drawLine('red', element.id, "changeRange");
             for( i=0; i< childDivs.length; i++ )
             {
                 if (childDivs[i].id == element.id){

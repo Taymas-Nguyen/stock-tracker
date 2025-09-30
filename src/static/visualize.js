@@ -1,6 +1,12 @@
-function drawLine(color, range){
+function drawLine(color, range, request_type){
 var csv_page;
 var time_format = "%Y %b";
+
+// d3.js sends fetch request to cvs page
+// default fetch is to change range
+if (request_type == null){
+  request_type = "searchTicker";
+}
 
 var past_date = new Date();
 // 5 days shows 7 days, this is intended
@@ -54,7 +60,12 @@ const svg = d3.select("#line_graph")
   .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);  
 //Read the data
-d3.csv(csv_page,
+d3.csv(csv_page, {
+
+    headers: new Headers({
+      "requestType": request_type,
+    })
+  },
 
   function(d){
     // todo: change time format based on ranges

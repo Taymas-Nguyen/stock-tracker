@@ -1,4 +1,11 @@
 function drawLine(color, range, request_type){
+// when range is change, disable buttons and show loading screen
+for( i=0; i< childDivs.length; i++ )
+    {
+        childDivs[i].disabled = true;
+    }
+document.getElementById('loading_graph').style.display = 'inline';
+
 var csv_page;
 var time_format = "%Y %b";
 
@@ -102,6 +109,13 @@ d3.csv(csv_page, {
         .x(function(d) { return x(d.date) })
         .y(function(d) { return y(d.value) })
         )
+
+    // when svg is done rendering, enable buttons and hide loading screen
+    document.getElementById('loading_graph').style.display = 'none';
+    for( i=0; i< childDivs.length; i++ )
+      { 
+          childDivs[i].disabled = false;
+      }
 
 })
 

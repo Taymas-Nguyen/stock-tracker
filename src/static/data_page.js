@@ -1,7 +1,6 @@
 // on page load, graph default max range from visualize.js
 document.addEventListener('DOMContentLoaded', function() {
     drawLine("steelblue", "Max");
-    document.getElementById('loading_graph').style.display = 'none';
 });
 
 // array of all of range buttons
@@ -19,11 +18,6 @@ for( i=0; i< childDivs.length; i++ )
 }
 
 function getRange(element, ticker_name) {
-    for( i=0; i< childDivs.length; i++ )
-    {
-        childDivs[i].disabled = true;
-    }
-    document.getElementById('loading_graph').style.display = 'inline';
     removeSVG();
     $.ajax({
         type: "GET",
@@ -37,11 +31,6 @@ function getRange(element, ticker_name) {
                 else{
                     childDivs[i].style.backgroundColor = 'transparent';
                 }
-            }
-            document.getElementById('loading_graph').style.display = 'none';
-            for( i=0; i< childDivs.length; i++ )
-            {
-                childDivs[i].disabled = false;
             }
         },
     });

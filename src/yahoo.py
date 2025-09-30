@@ -3,13 +3,18 @@ import pandas as pd
 import pytz as tz
 from datetime import datetime, timedelta
 
+import logging
+logger = logging.getLogger('yfinance')
+logger.disabled = True
+logger.propagate = False
+
 def get_info(ticker_name):
     
     # get ticker information
     # yahoo only downloads last 7 days of data if interval is 1 minute
     # import both max and minute interval data
-    minute_hist = yf.download(ticker_name, period="max", interval="1m")
-    max_hist = yf.download(ticker_name, period="max", interval="1d")
+    minute_hist = yf.download(ticker_name, period="max", interval="1m", progress = False, auto_adjust = True)
+    max_hist = yf.download(ticker_name, period="max", interval="1d", progress = False, auto_adjust = True)
     original_timezone = "UTC"
     target_timezone = "America/Los_Angeles" # pdt
 

@@ -6,10 +6,6 @@ from yahoo import get_info
 from cache import cache_stock_max
 
 def csv_page_max(request):
-    # indicates when user presses on range buttons, return cvs from cache
-    if request.headers.get("Requesttype") == "changeRange":
-        return HttpResponse(cache_stock_max[request.session['ticker']], content_type='text/plain')
-   
     # get data from yahoo.py and turn into csv in this views  
     data = get_info(request.session['ticker'])[0] 
     output = StringIO()
@@ -20,5 +16,9 @@ def csv_page_max(request):
 
     # store known stocks as csv
     cache_stock_max[request.session['ticker']] = csv_page
+
+    # indicates when user presses on range buttons, return cvs from cache
+    if request.headers.get("Requesttype") == "changeRange":
+        return HttpResponse(cache_stock_max[request.session['ticker']], content_type='text/plain')
 
     return HttpResponse(csv_page, content_type='text/plain')

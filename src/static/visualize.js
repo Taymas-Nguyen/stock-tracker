@@ -60,6 +60,8 @@ const svg = d3.select("#line_graph")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);  
+
+
 //Read the data
 d3.csv(csv_page, {
 
@@ -103,6 +105,74 @@ d3.csv(csv_page, {
         .x(function(d) { return x(d.date) })
         .y(function(d) { return y(d.value) })
         )
+
+
+
+
+    // start of tooltip
+
+  const circle = svg.append("circle")
+    .attr("r", 0)
+    .attr("fill", "steelblue")
+    .style("stroke", "white")
+    .attr("opacity", .70)
+    .style("pointer-events", "none");
+
+    const listeningRect = svg.append("rect")
+    .attr("width", width)
+    .attr("height", height);
+    
+                const tooltip = d3.select("#tooltip")
+  .append("div")
+  .attr("class", "tooltip");
+
+    listeningRect.on("mousemove", function (event) {
+
+    const [xCoord] = d3.pointer(event, this);
+    const bisectDate = d3.bisector(d => d.date).left;
+    const x0 = x.invert(xCoord);
+    const i = bisectDate(data, x0, 1);
+    const d0 = data[i - 1];
+    const d1 = data[i];
+    const d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+    const xPos = x(d.date);
+    const yPos = y(d.value);
+    
+            circle.transition()
+      .duration(50)
+      .attr("r", 5);
+
+    circle.attr("cx", xPos)
+      .attr("cy", yPos);
+
+      
+const formatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: '2-digit',
+  hour12: false // Set to true for 12-hour format with AM/PM, false for 24-hour format
+});
+
+    tooltip
+      .style("display", "block")
+      .style("left", xPos + 65)
+      .style("top", yPos + 45)
+      .html(`${formatter.format(d.date)} <br> ${d.value}`);
+      });
+    // Update the circle position
+
+
+      
+        listeningRect.on("mouseleave", function () {
+    circle.transition()
+      .duration(50)
+      .attr("r", 0);
+
+    tooltip.style("display", "none");
+  });
+
+
+      // end of tooltip
 
     // when svg is done rendering, enable buttons and hide loading screen
     document.getElementById('loading_graph').style.display = 'none';

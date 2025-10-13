@@ -10,6 +10,7 @@
     </form>
 </div>
 <div id = "button_and_graph">
+    <div id="tooltip"></div>
     <div id = "range_buttons">  
         <div>
             <button onclick= 'getRange(this, "{{ticker_name}}" )' id="1 Day" >1 Day</button>
@@ -103,6 +104,26 @@
 
     #loading_words{
         color: white;
+    }
+
+    rect {
+      pointer-events: all;
+      fill-opacity: 0;
+      stroke-opacity: 0;
+      z-index: 10;
+    }
+
+    .tooltip {
+        position: absolute;
+        pointer-events: none;
+        padding: 10px;
+        background-color: steelblue;
+        color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        display: none;
+        opacity: .75;
+        z-index: 10;
     }
 
 </style>

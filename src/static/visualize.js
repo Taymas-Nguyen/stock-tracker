@@ -1,6 +1,7 @@
 function drawLine(color, range, request_type){
   var csv_page;
-  var time_format = "%Y %b";
+  var time_format;
+  var range_tooltip_format;
 
   // d3.js sends fetch request to cvs page
   // default fetch is to change range
@@ -14,35 +15,82 @@ function drawLine(color, range, request_type){
     csv_page = "../csv_page_minute";
     past_date.setDate(past_date.getDate() - 1)
     time_format = "%b %d %H:%M";
+    range_tooltip_format = {
+      month: 'short',
+      day: '2-digit',
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true
+    }
   }
   if (range == "5 Days"){
     csv_page = "../csv_page_minute";
     past_date.setDate(past_date.getDate() - 7)
     time_format = "%b %d %H:%M";
+    range_tooltip_format = {
+      month: 'short',
+      day: '2-digit',
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true
+    }
   }
   if (range == "1 Month"){
     csv_page = "../csv_page_max";
     past_date.setDate(past_date.getDate() - 31)
-    time_format = "%b";
+    time_format = "%b %d";
+    range_tooltip_format = {
+      month: 'short',
+      day: '2-digit',
+    }
   }
   if (range == "6 Months"){
     csv_page = "../csv_page_max";
     past_date.setDate(past_date.getDate() - 185)
+    time_format = "%Y %b %d";
+    range_tooltip_format = {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    }
   }
   if (range == "Year to Date"){
     csv_page = "../csv_page_max";
     past_date = new Date(new Date().getFullYear(), 0, 1);
+    time_format = "%Y %b";
+    range_tooltip_format = {
+      month: 'short',
+      day: '2-digit',
+    }
   }
   if (range == "1 Year"){
     csv_page = "../csv_page_max";
     past_date.setDate(past_date.getDate() - 366)
+    time_format = "%Y %b";
+    range_tooltip_format = {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    }
   }
   if (range == "5 Years"){
     csv_page = "../csv_page_max";
     past_date.setDate(past_date.getDate() - 366*5)
+    time_format = "%Y %b";
+    range_tooltip_format = {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    }
   }
   if (range == "Max"){
     csv_page = "../csv_page_max";
+    time_format = "%Y %b";
+    range_tooltip_format = {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    }
   }
 
   // set the dimensions and margins of the graph
@@ -141,13 +189,7 @@ function drawLine(color, range, request_type){
             .attr("cx", xPos)
             .attr("cy", yPos);
 
-          const formatter = new Intl.DateTimeFormat('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: '2-digit',
-              hour12: false // Set to true for 12-hour format with AM/PM, false for 24-hour format
-            }
-          );
+          const formatter = new Intl.DateTimeFormat('en-US', range_tooltip_format);
 
           tooltip
             .style("display", "block")

@@ -1,8 +1,26 @@
 {% load static %}
 <script src= "{% static '\jquery-3.7.1.js' %}"></script>
 
-<div id = {{name}} style = "margin-bottom: 600px;">
-        <div id = '{{search_box}}'> 
+<div id = {{name}} style = "margin-bottom: 200px;">
+        <div id = '{{search_box}}' style = "margin-bottom: -20px;"> 
+            <button onclick= 'deleteGraph(this)' style="
+                background-image: url('/static/delete3.jpg');
+                background-size: cover;  
+                background-position: center; 
+                overflow: hidden;
+                background-repeat: no-repeat; 
+                width: 50px;
+                height: 50px;
+                border-radius: 100%;
+                margin: 0; 
+                padding: 0;
+                left: 370;
+                position: absolute; 
+                background-color: 
+                transparent;
+                display: inline-block"
+                >
+            </button>
             <div class="search_box_background" style = "
                 width: 350px; 
                 height: 30px; 
@@ -13,11 +31,12 @@
                 border-radius: 100px;
                 overflow-y: auto;">
             </div>
+            <form method="post" autocomplete="off">
+                {%csrf_token%} 
+                {{form}}
+                <button name="{{formname}}" style = "display: none"></button>
+            </form>
         </div>
-        <form method="post" autocomplete="off">
-            {%csrf_token%} 
-            {{form}}
-        </form>
     <div id = "{{button_and_graph}}">
         <div id = "{{tooltip}}"></div>
         <div id = "{{range_buttons}}" style = "
@@ -52,9 +71,9 @@
             <div>
                 <div id = {{line_graph}} style = "
                         margin-top: -200px;
-                        left: -20;
-                        top: 320;
-                        position: absolute
+                        left: -1170;
+                        top: 65;
+                        position: relative
                         "> 
                     <div id = {{loading_graph}} style = "
                         background-color: black;
@@ -76,8 +95,6 @@
         </div>
     </div>
 </div>
-
-<h1>asd</h1>
 
 <!-- styles relating to forms are directly written in their form class -->
  

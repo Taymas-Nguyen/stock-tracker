@@ -1,3 +1,25 @@
+// on page load, graph default max range from visualize.js
+document.addEventListener('DOMContentLoaded', function() {
+    var starting = 'stock0';
+    topDiv = document.getElementById(starting);
+    range_buttons = topDiv.querySelectorAll('button');
+    for( i=0; i< range_buttons.length; i++ )
+        {
+            range_buttons[i].disabled = true;
+        }
+    topDiv.querySelector(`#${starting}-loading_graph`).style.display = 'inline';
+    for( i=0; i< range_buttons.length; i++ )
+    {
+        if (range_buttons[i].id == `${starting}-Max`){
+            range_buttons[i].style.backgroundColor = 'yellow';
+        }
+        else{
+            range_buttons[i].style.backgroundColor = 'transparent';
+        }
+    }
+    drawLine('red', "Max", starting, "changeRange");
+});
+
 // on ANY range button press, get top level parent, modify only that div
 function rangeClicked(element, ticker_name) {
     let topLevelDiv = element;
@@ -29,26 +51,6 @@ function rangeClicked(element, ticker_name) {
     drawLine('red', rangeType, topDivName, "changeRange");
 }
 
-
-// on page load, graph default max range from visualize.js
-document.addEventListener('DOMContentLoaded', function() {
-    var starting = 'stock2';
-    topDiv = document.getElementById(starting)
-    range_buttons = topDiv.querySelectorAll('button');
-    for( i=0; i< range_buttons.length; i++ )
-        {
-            range_buttons[i].disabled = true;
-        }
-    topDiv.querySelector(`#${starting}-loading_graph`).style.display = 'inline';
-    for( i=0; i< range_buttons.length; i++ )
-    {
-        console.log(range_buttons[i].id)
-        if (range_buttons[i].id == `${starting}-Max`){
-            range_buttons[i].style.backgroundColor = 'yellow';
-        }
-        else{
-            range_buttons[i].style.backgroundColor = 'transparent';
-        }
-    }
-    drawLine('red', "Max", starting, "changeRange");
-});
+function deleteGraph(element){
+    console.log('pres');
+}

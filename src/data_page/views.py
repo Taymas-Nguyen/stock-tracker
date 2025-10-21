@@ -8,17 +8,22 @@ from cache import cache_stock_max, cache_stock_minute
 from csv_page_max.views import csv_page_max
 from csv_page_minute.views import csv_page_minute
 
+# keep track of which graph/form has which stock
+form_stock = {}
+
 def data_page(request):
     form0 = search_form()
     form1 = search_form()
-    context = {'form0': form0, 'form1': form1}
+    form2 = search_form()
+    context = {'form0': form0, 'form1': form1, 'form2': form2}
 
     # if user searches for ticker via button in data_page
     # else get ticker from home_page
     if request.method == "POST":
+        print(request.POST)
         request.session['ticker'] =  request.POST['ticker']    
-        cache_stock_max.clear()
-        cache_stock_minute.clear()
+        csv_page_max(request)
+        csv_page_minute(request)
     context['ticker_name'] = request.session['ticker']
 
     # return same page if user presses range buttons instead of search bar from data_page
@@ -26,7 +31,6 @@ def data_page(request):
         return render(request, "data_page.html", context)    
     
 
-    csv_page_max(request)
-    csv_page_minute(request)
+    
  
     return render(request, "data_page.html", context)

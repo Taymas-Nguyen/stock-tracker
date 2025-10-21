@@ -1,0 +1,116 @@
+{% load static %}
+<script src= "{% static '\jquery-3.7.1.js' %}"></script>
+
+<div id = {{name}} style = "margin-bottom: 600px;">
+        <div id = '{{search_box}}'> 
+            <div class="search_box_background" style = "
+                width: 350px; 
+                height: 30px; 
+                margin-left: 10px;
+                background-color: white; 
+                border: 2px solid gray; 
+                position: absolute; 
+                border-radius: 100px;
+                overflow-y: auto;">
+            </div>
+        </div>
+        <form method="post" autocomplete="off">
+            {%csrf_token%} 
+            {{form}}
+        </form>
+    <div id = "{{button_and_graph}}">
+        <div id = "{{tooltip}}"></div>
+        <div id = "{{range_buttons}}" style = "
+                margin-left: 1150px;
+                margin-top: 80px;
+                color: red;
+                ">  
+            <div>
+                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Day}}" >1 Day</button>
+            </div>
+            <div>   
+                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Days}}">7 Days</button>
+            </div>
+            <div>      
+                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Month}}">1 Month</button>
+            </div>
+            <div>      
+                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{6Months}}">6 Months</button>
+            </div>
+            <div>      
+                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{YearToDate}}">Year to Date</button>
+            </div>
+            <div>      
+                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Year}}">1 Year</button>
+            </div>
+            <div>      
+                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Years}}">5 Years</button>
+            </div>
+            <div>      
+                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{Max}}">Max</button>
+            </div>
+            <div>
+                <div id = {{line_graph}} style = "
+                        margin-top: -200px;
+                        left: -20;
+                        top: 320;
+                        position: absolute
+                        "> 
+                    <div id = {{loading_graph}} style = "
+                        background-color: black;
+                        width: 1120;
+                        height: 390;
+                        left: 40px;
+                        position: absolute;
+                        text-align: center;
+                        vertical-align: middle;
+                        line-height: 400px; 
+                        display: inline;
+                        ">   
+                        <h1 id = "{{loading_words}}" style = "color: white;" >  Loading ... {{ticker_name}} ...  </h1>
+                    </div>
+                    <script src="https://d3js.org/d3.v7.min.js"></script>
+                    <script src= "{% static '\visualize.js' %}"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1>asd</h1>
+
+<!-- styles relating to forms are directly written in their form class -->
+ 
+<style>
+
+    
+
+    
+    body{
+        background-color: pink;
+        padding-top: 20px;
+        margin:0;
+        padding:0;
+    }
+
+    rect {
+        pointer-events: all;
+        fill-opacity: 0;
+        stroke-opacity: 0;
+        z-index: 10;
+    }
+
+    .tooltip {
+        position: absolute;
+        pointer-events: none;
+        padding: 10px;
+        background-color: steelblue;
+        color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        display: none;
+        opacity: .75;
+        z-index: 10;
+    }
+
+</style>

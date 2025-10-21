@@ -1,4 +1,4 @@
-function drawLine(color, range, request_type){
+function drawLine(color, range, topDivName, request_type){
   var csv_page;
   var time_format;
   var range_tooltip_format;
@@ -11,7 +11,7 @@ function drawLine(color, range, request_type){
   var past_date = new Date();
   
   // 5 days shows 7 days, this is intended
-  if (range == "1 Day"){
+  if (range == "1Day"){
     csv_page = "../csv_page_minute";
     past_date.setDate(past_date.getDate() - 1)
     time_format = "%b %d %H:%M";
@@ -23,7 +23,7 @@ function drawLine(color, range, request_type){
       hour12: true
     }
   }
-  if (range == "5 Days"){
+  if (range == "5Days"){
     csv_page = "../csv_page_minute";
     past_date.setDate(past_date.getDate() - 7)
     time_format = "%b %d %H:%M";
@@ -35,7 +35,7 @@ function drawLine(color, range, request_type){
       hour12: true
     }
   }
-  if (range == "1 Month"){
+  if (range == "1Month"){
     csv_page = "../csv_page_max";
     past_date.setDate(past_date.getDate() - 31)
     time_format = "%b %d";
@@ -44,7 +44,7 @@ function drawLine(color, range, request_type){
       day: '2-digit',
     }
   }
-  if (range == "6 Months"){
+  if (range == "6Months"){
     csv_page = "../csv_page_max";
     past_date.setDate(past_date.getDate() - 185)
     time_format = "%Y %b %d";
@@ -54,7 +54,7 @@ function drawLine(color, range, request_type){
       day: '2-digit',
     }
   }
-  if (range == "Year to Date"){
+  if (range == "YearToDate"){
     csv_page = "../csv_page_max";
     past_date = new Date(new Date().getFullYear(), 0, 1);
     time_format = "%Y %b";
@@ -63,7 +63,7 @@ function drawLine(color, range, request_type){
       day: '2-digit',
     }
   }
-  if (range == "1 Year"){
+  if (range == "1Year"){
     csv_page = "../csv_page_max";
     past_date.setDate(past_date.getDate() - 366)
     time_format = "%Y %b";
@@ -73,7 +73,7 @@ function drawLine(color, range, request_type){
       day: '2-digit',
     }
   }
-  if (range == "5 Years"){
+  if (range == "5Years"){
     csv_page = "../csv_page_max";
     past_date.setDate(past_date.getDate() - 366*5)
     time_format = "%Y %b";
@@ -98,11 +98,11 @@ function drawLine(color, range, request_type){
   const width = 1150 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
 
-  // append the svg object to the body of the page
+  // append the svg object to line graph of top div with unique id
   const svg = d3
-    .select("#line_graph")
+    .select(`#${topDivName}-line_graph`)
     .append("svg")
-    .attr("id", "svgid")
+    .attr("id", `${topDivName}-svgid`)
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -125,8 +125,10 @@ function drawLine(color, range, request_type){
       // Add X axis --> it is a date format
       const x = d3 
         .scaleTime()
-        .domain(d3.extent(data, function(d) { return d.date; }))
+        .domain(d3.extent(data, function(d) { 
+          return d.date; }))
         .range([ 0, width ]);
+
       svg
         .append("g")
         .attr("transform", `translate(0, ${height})`)
@@ -167,7 +169,7 @@ function drawLine(color, range, request_type){
         .attr("height", height);
 
       const tooltip = d3
-        .select("#tooltip")
+        .select(`#${topDivName}-tooltip`)
         .append("div")
         .attr("class", "tooltip");
 
@@ -193,8 +195,8 @@ function drawLine(color, range, request_type){
 
           tooltip
             .style("display", "block")
-            .style("left", xPos + 65)
-            .style("top", yPos + 45)
+            .style("left", xPos + 1)
+            .style("top", yPos + 1)
             .html(`${formatter.format(d.date)} <br> ${d.value}`);
         }
       );
@@ -211,14 +213,17 @@ function drawLine(color, range, request_type){
       // end of tooltip
 
       // when svg is done rendering, enable buttons and hide loading screen
-      document.getElementById('loading_graph').style.display = 'none';
-      for( i=0; i< childDivs.length; i++ ){ 
-          childDivs[i].disabled = false;
+      topDiv = document.getElementById(topDivName)
+      range_buttons = topDiv.querySelectorAll('button');
+      for( i=0; i< range_buttons.length; i++ )
+      {
+        range_buttons[i].disabled = false;
       }
+      topDiv.querySelector(`#${topDivName}-loading_graph`).style.display = 'none';
     }
   )
 }
 
-function removeSVG(){
-  const a = d3.select("#svgid").remove();
+function removeSVG(topDivName){
+  d3.select(`#${topDivName}-svgid`).remove();
 }

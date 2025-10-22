@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     drawLine('red', "Max", starting, "changeRange");
 });
 
-// on ANY range button press, get top level parent, modify only that div
+// on ANY range button press, get top level parent (i.e stock0, stock1, ect), modify only that div
 function rangeClicked(element, ticker_name) {
     let topLevelDiv = element;
     while (topLevelDiv.parentNode && topLevelDiv.parentNode !== document.body && topLevelDiv.parentNode !== document.documentElement) {
@@ -51,6 +51,26 @@ function rangeClicked(element, ticker_name) {
     drawLine('red', rangeType, topDivName, "changeRange");
 }
 
+// hide only the graph and buttons, not the search bar. hide the delete icon and show the add icon
+// all graphs underneath should move up, only modify the top div 
 function deleteGraph(element){
-    console.log('pres');
+    let topLevelDiv = element;
+    while (topLevelDiv.parentNode && topLevelDiv.parentNode !== document.body && topLevelDiv.parentNode !== document.documentElement) {
+        if (topLevelDiv.parentNode.tagName.toLowerCase() === 'div') {
+            topLevelDiv = topLevelDiv.parentNode;
+        }   
+    }
+    topDivName = topLevelDiv.id;
+}
+
+// hide the add icon and show the delete icon
+// all graphs/buttons reappear, only modify the top div, all graphs below should move down 
+function addGraph(element){
+    let topLevelDiv = element;
+    while (topLevelDiv.parentNode && topLevelDiv.parentNode !== document.body && topLevelDiv.parentNode !== document.documentElement) {
+        if (topLevelDiv.parentNode.tagName.toLowerCase() === 'div') {
+            topLevelDiv = topLevelDiv.parentNode;
+        }   
+    }
+    topDivName = topLevelDiv.id;
 }

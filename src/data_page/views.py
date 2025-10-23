@@ -12,7 +12,7 @@ from csv_page_minute.views import csv_page_minute
 form_stock = {}
 
 def data_page(request):
-    form0 = search_form()
+    form0 = search_form(request.POST)
     form1 = search_form()
     form2 = search_form()
     context = {'form0': form0, 'form1': form1, 'form2': form2}
@@ -20,7 +20,6 @@ def data_page(request):
     # if user searches for ticker via button in data_page
     # else get ticker from home_page
     if request.method == "POST":
-        print(request.POST)
         request.session['ticker'] =  request.POST['ticker']    
         csv_page_max(request)
         csv_page_minute(request)
@@ -28,9 +27,6 @@ def data_page(request):
 
     # return same page if user presses range buttons instead of search bar from data_page
     if "ticker" not in request.POST:
-        return render(request, "data_page.html", context)    
-    
+        return render(request, "data_page.html", context) 
 
-    
- 
     return render(request, "data_page.html", context)

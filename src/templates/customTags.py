@@ -4,7 +4,10 @@ register = template.Library()
 
 @register.inclusion_tag("template_data_page.html")
 def createGraph(form, number):
+    if form.is_valid():
+        ticker_name = form.cleaned_data['ticker']
     data = {
+    "ticker_name": ticker_name,
     "form":form, 
     "formname":f"form{number}",
     "name":f"stock{number}",

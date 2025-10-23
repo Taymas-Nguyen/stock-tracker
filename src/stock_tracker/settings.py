@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'data_page',
     'yahoo',
     'csv_page_max', 
-    'csv_page_minute', 
+    'csv_page_minute',
+    'templates',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        'libraries':{
+            'customTags': 'templates.customTags',
+            },
         },
     },
 ]

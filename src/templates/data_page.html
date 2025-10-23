@@ -1,5 +1,9 @@
 {% load static %}
-{% include "template_data_page.html" with 
+{% load customTags %}
+
+{% createGraph form0 "0" %}
+
+<!-- {% include "template_data_page.html" with 
     form=form0 
     formname="form0"
     name="stock0"
@@ -20,6 +24,6 @@
     line_graph="stock0-line_graph"
     loading_graph="stock0-loading_graph"
     loading_words="stock0-loading_words"
-%}
+%} -->
 <script src= "{% static '\data_page.js' %}"></script>
 

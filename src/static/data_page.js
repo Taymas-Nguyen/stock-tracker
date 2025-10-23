@@ -51,6 +51,7 @@ function rangeClicked(element, ticker_name) {
 // all graphs underneath should move up, only modify the top div 
 function deleteGraph(element){
     topDivName = getTopDiv(element);
+    topDiv.querySelector(`#${topDivName}-button_and_graph`).style.display = 'none';
 }
 
 // hide the add icon and show the delete icon

@@ -1,8 +1,10 @@
+all_graphs = []
+
 // on page load, graph default max range from visualize.js
 document.addEventListener('DOMContentLoaded', function() {
     var starting = 'stock0';
+    all_graphs.push(starting);
     topDiv = document.getElementById(starting);
-    topDiv.querySelector(`#${starting}-addGraph`).style.display = 'none';
     topDiv.querySelector(`#${starting}-deleteGraph`).style.display = 'inline';
     range_buttons = topDiv.querySelectorAll('button');
     for( i=0; i< range_buttons.length; i++ )
@@ -47,15 +49,13 @@ function rangeClicked(element, ticker_name) {
     drawLine('red', rangeType, topDivName, "changeRange");
 }
 
-// hide only the graph and buttons, not the search bar. hide the delete icon and show the add icon
-// all graphs underneath should move up, only modify the top div 
+// delete entire graph, all graphs beneath should move up
 function deleteGraph(element){
     topDivName = getTopDiv(element);
-    topDiv.querySelector(`#${topDivName}-button_and_graph`).style.display = 'none';
+    topDiv.querySelector(`#${topDivName}-button_and_graph`).remove();
 }
 
-// hide the add icon and show the delete icon
-// all graphs/buttons reappear, only modify the top div, all graphs below should move down 
+// add new graph at the bottom
 function addGraph(element){
     topDivName = getTopDiv(element);
 }

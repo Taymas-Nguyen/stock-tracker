@@ -6,13 +6,14 @@ register = template.Library()
 def createGraph(form, number):
     if form.is_valid():
         ticker_name = form.cleaned_data['ticker']
+    else:
+        ticker_name = 'NONE'
     data = {
     "ticker_name": ticker_name,
     "form":form, 
     "formname":f"form{number}",
     "name":f"stock{number}",
     "deleteGraph":f"stock{number}-deleteGraph",
-    "addGraph":f"stock{number}-addGraph",
     "search_box":f"stock{number}-search_box",
     "button_and_graph":f"stock{number}-button_and_graph",
     "tooltip":f"stock{number}-tooltip",

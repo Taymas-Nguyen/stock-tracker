@@ -15,8 +15,9 @@ class search_form(forms.ModelForm):
                 'style': """
                 font-size: 25; 
                 margin-left: 20px;
+                top: -33;
                 pointer-event: none;
-                position: absolute;
+                position: relative;
                 border-style: none;
                 outline: none;
                 background: transparent;

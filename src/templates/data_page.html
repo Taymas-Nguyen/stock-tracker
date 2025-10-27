@@ -5,7 +5,7 @@
 
 <body>
     <div id = 'banner'>
-        <button id ="addGraph" onclick= 'addGraph(this)'>Add New Stock</button>
+        <button id ="addGraphButton" onclick= 'addGraph(this)'>Add New Stock</button>
     </div>
     {% createGraph form0 "0" %}
 </body>
@@ -22,15 +22,15 @@
     #banner{
         background-color: #1995AD;
         width: 100%;
-        height: 100px;
+        height: 40px;
     }
 
-    #addGraph{
-            width: 300px;
-            height: 50px;
+    #addGraphButton{
+            width: 150px;
+            height: 25px;
             left: 50; 
-            font-size: 40;
-            top: 25;
+            font-size: 17;
+            top: 7;
             border-color: transparent;
             position: absolute; 
             background-color: green;

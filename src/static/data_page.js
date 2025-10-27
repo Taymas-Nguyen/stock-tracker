@@ -52,7 +52,7 @@ function rangeClicked(element, ticker_name) {
 // delete entire graph, all graphs beneath should move up
 function deleteGraph(element){
     topDivName = getTopDiv(element);
-    topDiv.querySelector(`#${topDivName}-button_and_graph`).remove();
+    document.getElementById(`${topDivName}`).remove();
 }
 
 // add new graph at the bottom

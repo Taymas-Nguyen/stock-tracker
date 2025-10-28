@@ -3,9 +3,13 @@ from django.shortcuts import render, redirect
 import csv
 from io import StringIO
 from yahoo import get_info
-from cache import cache_stock_minute
+from cache import cache_stock_minute0
 
-def csv_page_minute(request):
+def csv_page_minute0(request):
+    # indicates when user presses on range buttons, return cvs from cache
+    if request.headers.get("Requesttype") == "changeRange":
+        return HttpResponse(cache_stock_minute0[request.session['ticker']], content_type='text/plain')
+    
     # get data from yahoo.py and turn into csv in this views  
     data = get_info(request.session['ticker'])[1] 
     output = StringIO()
@@ -15,10 +19,7 @@ def csv_page_minute(request):
     csv_page = output.getvalue()
 
     # store known stocks as cvs
-    cache_stock_minute[request.session['ticker']] = csv_page
+    cache_stock_minute0[request.session['ticker']] = csv_page
 
-    # indicates when user presses on range buttons, return cvs from cache
-    if request.headers.get("Requesttype") == "changeRange":
-        return HttpResponse(cache_stock_minute[request.session['ticker']], content_type='text/plain')
 
     return HttpResponse(csv_page, content_type='text/plain')

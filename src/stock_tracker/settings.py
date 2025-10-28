@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'home_page', 
     'data_page',
     'yahoo',
-    'csv_page_max', 
-    'csv_page_minute',
+    'csv_page_max0', 
+    'csv_page_minute0',
+    'csv_page_max1', 
+    'csv_page_minute1',
     'templates',
 ]
 

@@ -2,5 +2,5 @@ from django.urls import path
 from . import views 
 
 urlpatterns = [
-    path('', views.csv_page_max),
+    path('', views.csv_page_max1),
 ]

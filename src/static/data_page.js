@@ -1,27 +1,28 @@
-all_graphs = []
+all_graphs = ['stock0', 'stock1']
 
-// on page load, graph default max range from visualize.js
+// on page load, iterate through all graphs
 document.addEventListener('DOMContentLoaded', function() {
-    var starting = 'stock0';
-    all_graphs.push(starting);
-    topDiv = document.getElementById(starting);
-    topDiv.querySelector(`#${starting}-deleteGraph`).style.display = 'inline';
-    range_buttons = topDiv.querySelectorAll('button');
-    for( i=0; i< range_buttons.length; i++ )
+    console.log("page load");
+    all_graphs.forEach((stock) => {
+        topDiv = document.getElementById(stock);
+        topDiv.querySelector(`#${stock}-deleteGraph`).style.display = 'inline';
+        range_buttons = topDiv.querySelectorAll('button');
+        for( i=0; i< range_buttons.length; i++ )
+            {
+                range_buttons[i].disabled = true;
+            }
+        topDiv.querySelector(`#${stock}-loading_graph`).style.display = 'inline';
+        for( i=0; i< range_buttons.length; i++ )
         {
-            range_buttons[i].disabled = true;
+            if (range_buttons[i].id == `${stock}-Max`){
+                range_buttons[i].style.backgroundColor = 'yellow';
+            }
+            else{
+                range_buttons[i].style.backgroundColor = 'transparent';
+            }
         }
-    topDiv.querySelector(`#${starting}-loading_graph`).style.display = 'inline';
-    for( i=0; i< range_buttons.length; i++ )
-    {
-        if (range_buttons[i].id == `${starting}-Max`){
-            range_buttons[i].style.backgroundColor = 'yellow';
-        }
-        else{
-            range_buttons[i].style.backgroundColor = 'transparent';
-        }
-    }
-    drawLine('red', "Max", starting, "changeRange");
+        drawLine('red', "Max", stock, "changeRange");
+    });
 });
 
 // on ANY range button press, get top level parent (i.e stock0, stock1, ect), modify only that div
@@ -52,12 +53,12 @@ function rangeClicked(element, ticker_name) {
 // delete entire graph, all graphs beneath should move up
 function deleteGraph(element){
     topDivName = getTopDiv(element);
-    document.getElementById(`${topDivName}`).remove();
 }
 
 // add new graph at the bottom
 function addGraph(element){
     topDivName = getTopDiv(element);
+    console.log("addgraph");
 }
 
 function getTopDiv(element){

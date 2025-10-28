@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home_page.urls')),
     path('data_page/', include('data_page.urls')),
-    path('csv_page_max/', include('csv_page_max.urls')), 
-    path('csv_page_minute/', include('csv_page_minute.urls')), 
+    path('csv_page_max0/', include('csv_page_max0.urls')), 
+    path('csv_page_minute0/', include('csv_page_minute0.urls')), 
+    path('csv_page_max1/', include('csv_page_max1.urls')), 
+    path('csv_page_minute1/', include('csv_page_minute1.urls')), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

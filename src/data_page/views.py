@@ -23,21 +23,29 @@ def data_page(request):
         if "form0" in request.POST:
             form_stock['form0'] = request.session['ticker']
 
-            mutable_data = request.POST.copy()
-            mutable_data['ticker'] = request.session['ticker']
-            form0 = search_form(mutable_data)
+            mutable_data0 = form0.data.copy()
+            mutable_data0['ticker'] = request.session['ticker']
+            form0 = search_form(mutable_data0)
 
-            print('form0',form0.data.get('ticker'))
+            mutable_data1 = form1.data.copy()
+            mutable_data1['ticker'] = form_stock['form1']
+            form1 = search_form(mutable_data1)
+
+            print('form0',form0.data.get('ticker'), form1.data.get('ticker'))
             csv_page_max0(request)
             csv_page_minute0(request)
         if "form1" in request.POST:
             form_stock['form1'] = request.session['ticker']
 
-            mutable_data = request.POST.copy()
-            mutable_data['ticker'] = request.session['ticker']
-            form1 = search_form(mutable_data)
+            mutable_data1 = form1.data.copy()
+            mutable_data1['ticker'] = request.session['ticker']
+            form1 = search_form(mutable_data1)
 
-            print('form1', form1.data.get('ticker'))
+            mutable_data0 = form0.data.copy()
+            mutable_data0['ticker'] = form_stock['form0']
+            form0 = search_form(mutable_data0)
+
+            print('form1', form1.data.get('ticker'), form0.data.get('ticker'))
             csv_page_max1(request)
             csv_page_minute1(request)
 

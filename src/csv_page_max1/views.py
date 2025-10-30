@@ -6,7 +6,6 @@ from yahoo import get_info
 from cache import cache_stock_max0, form_stock
 
 def csv_page_max1(request):
-    print("max1", form_stock['form1'], request.session['ticker'])
     # indicates when user presses on range buttons, return cvs from cache
     try:
         return HttpResponse(cache_stock_max0[form_stock['form1']], content_type='text/plain')

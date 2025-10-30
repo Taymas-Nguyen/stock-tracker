@@ -1,11 +1,12 @@
 from django import template
+from cache import cache_stock_max0, cache_stock_minute0, form_stock
 
 register = template.Library()
 
 @register.inclusion_tag("template_data_page.html")
 def createGraph(form, number):
     if form.is_valid():
-        ticker_name = form.cleaned_data['ticker']
+        ticker_name = form_stock[f"form{number}"]
     else:
         ticker_name = 'NONE'
     data = {

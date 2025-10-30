@@ -6,7 +6,6 @@ from yahoo import get_info
 from cache import cache_stock_max0, form_stock
 
 def csv_page_max0(request):
-    print("max0", form_stock['form0'], request.session['ticker'])
     try:
         return HttpResponse(cache_stock_max0[form_stock['form0']], content_type='text/plain')
     except:

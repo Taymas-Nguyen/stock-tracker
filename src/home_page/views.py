@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import search_form
 from data_page.views import data_page
-from cache import cache_stock_max0, cache_stock_minute0
+from cache import cache_stock_max0, cache_stock_minute0, form_stock
 from csv_page_max0.views import csv_page_max0
 from csv_page_minute0.views import csv_page_minute0
 
@@ -17,13 +17,16 @@ def home_page(request):
     # when user searches for query and presses enter
     if request.method == "POST":
         form = search_form(request.POST)
-        request.session['ticker'] =  request.POST['ticker']  
+        request.session['ticker'] =  request.POST['ticker']
+        if 'form0' not in form_stock:
+            form_stock['form0'] = "NONE"
+        if 'form1' not in form_stock:
+            form_stock['form1'] = "NONE"  
         csv_page_max0(request)
         csv_page_minute0(request)
             
         # go to data page when ticker is submitted
         # all information in request is stored in session
-          
         return redirect("/data_page/")
             
     return render(request, "home_page.html", context)  

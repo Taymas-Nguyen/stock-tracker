@@ -22,7 +22,7 @@ def home_page(request):
             form_stock['form0'] = "NONE"
         if 'form1' not in form_stock:
             form_stock['form1'] = "NONE"  
-        csv_page_max0(request)
+        csv_page_max0(request, 'form0')
         csv_page_minute0(request)
             
         # go to data page when ticker is submitted

@@ -111,7 +111,7 @@ function drawLine(color, range, topDivName, request_type){
 
   //Read the data
   console.log(topDivName);
-  d3.csv(csv_page + topDivName[topDivName.length - 1], {
+  d3.csv("max" + topDivName[topDivName.length - 1], {
     headers: new Headers({"requestType": request_type,})
   },
 

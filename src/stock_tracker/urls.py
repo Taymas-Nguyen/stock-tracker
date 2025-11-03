@@ -27,6 +27,6 @@ urlpatterns = [
     path('csv_page_minute0/', include('csv_page_minute0.urls')), 
     path('csv_page_max1/', include('csv_page_max1.urls')), 
     path('csv_page_minute1/', include('csv_page_minute1.urls')), 
-    path('max0/', include('csv_page_max0.urls')), 
-    path('max1/', include('csv_page_max0.urls')), 
+    path('data_page/max0/', include('csv_page_max0.urls')), 
+    path('data_page/max1/', include('csv_page_max0.urls')), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

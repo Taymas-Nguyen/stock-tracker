@@ -32,7 +32,7 @@ def data_page(request):
             form1 = search_form(mutable_data1)
 
             print('form0',form0.data.get('ticker'), form1.data.get('ticker'))
-            csv_page_max0(request)
+            csv_page_max0(request, 'form0')
             csv_page_minute0(request)
         if "form1" in request.POST:
             form_stock['form1'] = request.session['ticker']
@@ -46,7 +46,7 @@ def data_page(request):
             form0 = search_form(mutable_data0)
 
             print('form1', form1.data.get('ticker'), form0.data.get('ticker'))
-            csv_page_max1(request)
+            csv_page_max0(request, 'form1')
             csv_page_minute1(request)
 
 

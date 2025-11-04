@@ -1,11 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import search_form
-from csv_page_max0.views import csv_page_max0
-from csv_page_minute0.views import csv_page_minute0
-from csv_page_max1.views import csv_page_max1
-from csv_page_minute1.views import csv_page_minute1
-from cache import cache_stock_max0, cache_stock_minute0, form_stock
+from csv_page.views import csv_page
+from cache import form_stock
 
 def data_page(request):
     form0 = search_form(request.POST)
@@ -37,9 +34,8 @@ def data_page(request):
             mutable_data1['ticker'] = form_stock['form1']
             form1 = search_form(mutable_data1)
 
-            print('form0',form0.data.get('ticker'), form1.data.get('ticker'))
-            csv_page_max0(request, 'form0')
-            csv_page_minute0(request)
+            csv_page(request, 'max', 'form0')
+            csv_page(request, 'minute', 'form0')
         if "form1" in request.POST:
             form_stock['form1'] = request.session['ticker']
 
@@ -51,9 +47,8 @@ def data_page(request):
             mutable_data0['ticker'] = form_stock['form0']
             form0 = search_form(mutable_data0)
 
-            print('form1', form1.data.get('ticker'), form0.data.get('ticker'))
-            csv_page_max0(request, 'form1')
-            csv_page_minute1(request)
+            csv_page(request, 'max', 'form1')
+            csv_page(request, 'minute', 'form1')
 
 
     context = {'form0': form0, 'form1': form1}

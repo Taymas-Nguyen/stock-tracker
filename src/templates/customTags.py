@@ -1,5 +1,5 @@
 from django import template
-from cache import cache_stock_max0, cache_stock_minute0, form_stock
+from cache import form_stock
 
 register = template.Library()
 

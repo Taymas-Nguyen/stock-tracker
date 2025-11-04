@@ -2,14 +2,13 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import search_form
 from data_page.views import data_page
-from cache import cache_stock_max0, cache_stock_minute0, form_stock
-from csv_page_max0.views import csv_page_max0
-from csv_page_minute0.views import csv_page_minute0
+from cache import cache_stock_max, cache_stock_minute, form_stock
+from csv_page.views import csv_page
 
 def home_page(request):    
     # on home page call, clear cache
-    cache_stock_max0.clear()
-    cache_stock_minute0.clear()
+    cache_stock_max.clear()
+    cache_stock_minute.clear()
 
     form0 = search_form()
 
@@ -22,8 +21,8 @@ def home_page(request):
             form_stock['form0'] = "NONE"
         if 'form1' not in form_stock:
             form_stock['form1'] = "NONE"  
-        csv_page_max0(request, 'form0')
-        csv_page_minute0(request)
+        csv_page(request, 'max', 'form0')
+        csv_page(request, 'minute', 'form0')
             
         # go to data page when ticker is submitted
         # all information in request is stored in session

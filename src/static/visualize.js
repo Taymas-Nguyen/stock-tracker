@@ -12,7 +12,7 @@ function drawLine(color, range, topDivName, request_type){
   
   // 5 days shows 7 days, this is intended
   if (range == "1Day"){
-    csv_page = "../csv_page_minute";
+    csv_page = "minute";
     past_date.setDate(past_date.getDate() - 1)
     time_format = "%b %d %H:%M";
     range_tooltip_format = {
@@ -24,7 +24,7 @@ function drawLine(color, range, topDivName, request_type){
     }
   }
   if (range == "5Days"){
-    csv_page = "../csv_page_minute";
+    csv_page = "minute";
     past_date.setDate(past_date.getDate() - 7)
     time_format = "%b %d %H:%M";
     range_tooltip_format = {
@@ -36,7 +36,7 @@ function drawLine(color, range, topDivName, request_type){
     }
   }
   if (range == "1Month"){
-    csv_page = "../csv_page_max";
+    csv_page = "max";
     past_date.setDate(past_date.getDate() - 31)
     time_format = "%b %d";
     range_tooltip_format = {
@@ -45,7 +45,7 @@ function drawLine(color, range, topDivName, request_type){
     }
   }
   if (range == "6Months"){
-    csv_page = "../csv_page_max";
+    csv_page = "max";
     past_date.setDate(past_date.getDate() - 185)
     time_format = "%Y %b %d";
     range_tooltip_format = {
@@ -55,7 +55,7 @@ function drawLine(color, range, topDivName, request_type){
     }
   }
   if (range == "YearToDate"){
-    csv_page = "../csv_page_max";
+    csv_page = "max";
     past_date = new Date(new Date().getFullYear(), 0, 1);
     time_format = "%Y %b";
     range_tooltip_format = {
@@ -64,7 +64,7 @@ function drawLine(color, range, topDivName, request_type){
     }
   }
   if (range == "1Year"){
-    csv_page = "../csv_page_max";
+    csv_page = "max";
     past_date.setDate(past_date.getDate() - 366)
     time_format = "%Y %b";
     range_tooltip_format = {
@@ -74,7 +74,7 @@ function drawLine(color, range, topDivName, request_type){
     }
   }
   if (range == "5Years"){
-    csv_page = "../csv_page_max";
+    csv_page = "max";
     past_date.setDate(past_date.getDate() - 366*5)
     time_format = "%Y %b";
     range_tooltip_format = {
@@ -84,7 +84,7 @@ function drawLine(color, range, topDivName, request_type){
     }
   }
   if (range == "Max"){
-    csv_page = "../csv_page_max";
+    csv_page = "max";
     time_format = "%Y %b";
     range_tooltip_format = {
       year: 'numeric',
@@ -111,7 +111,7 @@ function drawLine(color, range, topDivName, request_type){
 
   //Read the data
   console.log(topDivName);
-  d3.csv("max" + topDivName[topDivName.length - 1], {
+  d3.csv(csv_page + topDivName[topDivName.length - 1], {
     headers: new Headers({"requestType": request_type,})
   },
 

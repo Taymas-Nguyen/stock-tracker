@@ -11,13 +11,13 @@ def home_page(request):
     cache_stock_max0.clear()
     cache_stock_minute0.clear()
 
-    form = search_form()
-    context = {'form': form}
+    form0 = search_form()
 
     # when user searches for query and presses enter
     if request.method == "POST":
-        form = search_form(request.POST)
-        request.session['ticker'] =  request.POST['ticker']
+        form0 = search_form(request.POST)
+        request.session['ticker'] = request.POST['ticker']
+        form_stock['form0'] = request.POST['ticker']
         if 'form0' not in form_stock:
             form_stock['form0'] = "NONE"
         if 'form1' not in form_stock:
@@ -29,4 +29,5 @@ def home_page(request):
         # all information in request is stored in session
         return redirect("/data_page/")
             
+    context = {'form': form0}
     return render(request, "home_page.html", context)  

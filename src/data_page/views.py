@@ -16,6 +16,12 @@ def data_page(request):
     if 'form1' not in form_stock:
         form_stock['form1'] = "NONE"
 
+    # if user searches for stock from home page
+    if request.method == "GET":
+        mutable_data0 = form0.data.copy()
+        mutable_data0['ticker'] = form_stock['form0']
+        form0 = search_form(mutable_data0)
+
     # if user searches for ticker via button in data_page
     # else get ticker from home_page
     if request.method == "POST":

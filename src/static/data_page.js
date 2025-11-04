@@ -2,6 +2,14 @@ all_graphs = ['stock0', 'stock1']
 
 // on page load, iterate through all graphs
 document.addEventListener('DOMContentLoaded', function() {
+
+    const elementsWithClass = document.querySelectorAll('.errorlist');
+
+    // Iterate through the NodeList and remove the class from each element
+    elementsWithClass.forEach(element => {
+    element.remove();
+    });
+
     console.log("page load");
     all_graphs.forEach((stock) => {
         topDiv = document.getElementById(stock);

@@ -4,12 +4,15 @@ import csv
 from io import StringIO
 from yahoo import get_info
 from cache import cache_stock_max, cache_stock_minute, form_stock
+import re 
 
 def csv_page(request, max_or_minute = 'default', form_name = 'default'):
-    # when page loads from home page
     # currently only works for forms with one digit
+
+    # when any csv page is requested/fetched by d3.csv in js, no min/max or form name is provided
+    # so those values are determined from the url itself
     if form_name == 'default':
-        form_name = f"form{str(request.path)[-2]}"
+        form_name = f"form{int(re.search(r"\d+", str(request.path)).group())}"
     if max_or_minute == 'default':
         if 'max' in str(request.path):
             max_or_minute = 'max'
@@ -20,6 +23,10 @@ def csv_page(request, max_or_minute = 'default', form_name = 'default'):
         cache = cache_stock_max
     else:
         cache = cache_stock_minute
+
+    # empty csv page if stock hasnt been submitted for a form yet
+    if form_name not in form_stock:
+        return HttpResponse("", content_type='text/plain')
     
     try:
         return HttpResponse(cache[form_stock[form_name]], content_type='text/plain')

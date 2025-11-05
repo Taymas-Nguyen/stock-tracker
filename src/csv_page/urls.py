@@ -1,11 +1,16 @@
 from django.urls import path
 from . import views 
+import json
+import re
+
+with open('./static/data_page.js', 'r') as file:
+    for line in file:
+        if 'amount_of_forms' in line:
+            amount_of_forms = int(re.search(r"\d+", line).group())
 
 urlpatterns = [
-
-    path('max0/', views.csv_page),
-    path('minute0/', views.csv_page),
-    
-    path('max1/', views.csv_page),
-    path('minute1/', views.csv_page),
 ]
+
+for i in range(amount_of_forms):
+    urlpatterns.append(path(f'max{i}/', views.csv_page))
+    urlpatterns.append(path(f'minute{i}/', views.csv_page))

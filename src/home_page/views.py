@@ -17,10 +17,7 @@ def home_page(request):
         form0 = search_form(request.POST)
         request.session['ticker'] = request.POST['ticker']
         form_stock['form0'] = request.POST['ticker']
-        if 'form0' not in form_stock:
-            form_stock['form0'] = "NONE"
-        if 'form1' not in form_stock:
-            form_stock['form1'] = "NONE"  
+
         csv_page(request, 'max', 'form0')
         csv_page(request, 'minute', 'form0')
             

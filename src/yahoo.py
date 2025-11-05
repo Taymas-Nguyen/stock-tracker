@@ -9,6 +9,8 @@ logger.disabled = True
 logger.propagate = False
 
 def get_info(ticker_name):
+    if ticker_name == '':
+        return ['date', 'value']
     
     # get ticker information
     # yahoo only downloads last 7 days of data if interval is 1 minute

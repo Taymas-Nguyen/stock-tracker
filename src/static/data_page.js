@@ -1,4 +1,16 @@
-all_graphs = ['stock0', 'stock1']
+// varible accessible by js and python (via regex parse) to keep track of # of forms across entire app, index at 0
+amount_of_forms = 3;
+
+all_graphs = ['stock0', 'stock1', 'stock2']
+
+// Source - https://stackoverflow.com/questions/7346563/loading-local-json-file
+// Posted by seppo0010
+// Retrieved 11/4/2025, License - CC-BY-SA 4.0
+
+$.getJSON("cache.json", function(json) {
+    console.log(json); // this will show the info it in firebug console
+});
+
 
 // on page load, iterate through all graphs
 document.addEventListener('DOMContentLoaded', function() {
@@ -10,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     element.remove();
     });
 
-    console.log("page load");
     all_graphs.forEach((stock) => {
         topDiv = document.getElementById(stock);
         topDiv.querySelector(`#${stock}-deleteGraph`).style.display = 'inline';

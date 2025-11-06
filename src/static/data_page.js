@@ -1,7 +1,12 @@
 // varible accessible by js and python (via regex parse) to keep track of # of forms across entire app, index at 0
-amount_of_forms = 3;
+amount_of_forms = 10;
 
-all_graphs = ['stock0', 'stock1', 'stock2']
+all_graphs = []
+for( i=0; i < amount_of_forms; i++ )
+{
+    all_graphs.push(`stock${i}`)
+}
+
 
 // Source - https://stackoverflow.com/questions/7346563/loading-local-json-file
 // Posted by seppo0010

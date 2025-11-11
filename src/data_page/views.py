@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .forms import search_form
 from csv_page.views import csv_page
-from cache import form_stock, form_ranges
+from cache import form_stock, form_ranges, cache_stock_max, cache_stock_minute
 import re
 from django.views.decorators.csrf import csrf_exempt
 import json 
@@ -28,6 +28,14 @@ def data_page(request):
 
     # if user searches for stock from home page
     if request.method == "GET":
+        form_ranges.clear()
+        cache_stock_max.clear()
+        cache_stock_minute.clear()
+
+        for i in form_as_string:
+            if i != 'form0':
+                form_stock[i] = ''
+
         mutable_data = form_dict['form0'].data.copy()
         mutable_data['ticker'] = form_stock['form0']
         form_dict['form0'] = search_form(mutable_data)

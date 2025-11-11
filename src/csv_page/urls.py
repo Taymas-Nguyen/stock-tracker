@@ -7,6 +7,7 @@ with open('./static/data_page.js', 'r') as file:
     for line in file:
         if 'amount_of_forms' in line:
             amount_of_forms = int(re.search(r"\d+", line).group())
+            break
 
 urlpatterns = [
 ]

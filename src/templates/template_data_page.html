@@ -1,6 +1,3 @@
-{% load static %}
-<script src= "{% static '\jquery-3.7.1.js' %}"></script>
-
 <div id = {{name}} style = "margin-bottom: 150px;">
         <div id = '{{search_box}}' style = "margin-bottom: -20px;"> 
             <button id="{{deleteGraph}}" onclick= 'deleteGraph(this)' style="
@@ -89,16 +86,12 @@
                         ">   
                         <h1 id = "{{loading_words}}" style = "color: white;" >  Loading ... {{ticker_name}} ...  </h1>
                     </div>
-                    <script src="https://d3js.org/d3.v7.min.js"></script>
-                    <script src= "{% static '\visualize.js' %}"></script>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- styles relating to forms are directly written in their form class -->
- 
 <style>
 
     rect {

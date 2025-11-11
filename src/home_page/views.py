@@ -11,6 +11,8 @@ def home_page(request):
     cache_stock_minute.clear()
 
     form0 = search_form()
+    if 'form0' not in form_stock:
+        form_stock['form0'] = ''
 
     # when user searches for query and presses enter
     if request.method == "POST":

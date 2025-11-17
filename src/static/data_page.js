@@ -8,45 +8,31 @@ for( i=0; i < amount_of_forms; i++ )
 }
 
 
-// on page load, iterate through all graphs
+// on page load
 document.addEventListener('DOMContentLoaded', function() {
 
-    const elementsWithClass = document.querySelectorAll('.errorlist');
-
     // Iterate through the NodeList and remove the list tags that django adds
+    const elementsWithClass = document.querySelectorAll('.errorlist');
     elementsWithClass.forEach(element => {
         element.remove();
     });
     
+    // Iterate through all graphs
     for (const stock of all_graphs) {
-        get_range(stock).then(data => {
-            topDiv = document.getElementById(stock);
-            rangeType = data == null ? "Max" : data;
-
-
-            // if stock has no range, then it has newly been created and its default is max
-            if (topDiv.querySelector(`#${stock}-range_buttons`).getAttribute('range') == null){
-                topDiv.querySelector(`#${stock}-range_buttons`).setAttribute('range' , 'Max');
+        // if graph has stock then show, else hide all elements
+        get_stock(stock).then(data =>{
+            if (data == null){
+                document.querySelector(`#${stock}`).style.display = 'none';
+            }else{
+                console.log("asd");
+                get_range(stock).then(data => {
+                    topDiv = document.getElementById(stock);
+                    rangeType = data == null ? "Max" : data;
+        
+                    loadingGraph(topDiv, stock, rangeType)
+                    drawLine('red', rangeType, stock);
+                });
             }
-
-            topDiv.querySelector(`#${stock}-deleteGraph`).style.display = 'inline';
-            range_buttons = topDiv.querySelectorAll('button');
-            for( i=0; i< range_buttons.length; i++ )
-                {
-                    range_buttons[i].disabled = true;
-                }
-            topDiv.querySelector(`#${stock}-loading_graph`).style.display = 'inline';
-            for( i=0; i< range_buttons.length; i++ )
-            {
-                if (range_buttons[i].id == `${stock}-${rangeType}`){
-
-                    range_buttons[i].style.backgroundColor = 'yellow';
-                }
-                else{
-                    range_buttons[i].style.backgroundColor = 'transparent';
-                }
-            }
-            drawLine('red', rangeType, stock);
         });
     }
 });
@@ -54,25 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // on ANY range button press, get top level parent (i.e stock0, stock1, ect), modify only that div
 function rangeClicked(element, ticker_name) {
     topDivName = getTopDiv(element);
-    
-    rangeType = element.id.split("-")[1];
-    removeSVG(topDivName);
+
     topDiv = document.getElementById(topDivName)
-    range_buttons = topDiv.querySelectorAll('button');
-    for( i=0; i< range_buttons.length; i++ )
-        {
-            range_buttons[i].disabled = true;
-        }
-    topDiv.querySelector(`#${topDivName}-loading_graph`).style.display = 'inline';
-    for( i=0; i< range_buttons.length; i++ )
-    {
-        if (range_buttons[i].id == element.id){
-            range_buttons[i].style.backgroundColor = 'yellow';
-        }
-        else{
-            range_buttons[i].style.backgroundColor = 'transparent';
-        }
-    }
+    removeSVG(topDivName);
+
+    rangeType = element.id.split("-")[1];
+    loadingGraph(topDiv, topDivName, rangeType)
 
     change_range(topDivName, rangeType);
     drawLine('red', rangeType, topDivName);
@@ -98,6 +71,25 @@ function getTopDiv(element){
     return topLevelDiv.id;
 }
 
+// before graphs can load, disable all buttons, show the loading icon, and highlight the chosen range
+function loadingGraph(topDiv, topDivName, rangeType){
+    range_buttons = topDiv.querySelectorAll('button');
+    for( i=0; i< range_buttons.length; i++ )
+        {
+            range_buttons[i].disabled = true;
+        }
+    topDiv.querySelector(`#${topDivName}-loading_graph`).style.display = 'inline';
+    for( i=0; i< range_buttons.length; i++ )
+    {
+        if (range_buttons[i].id == `${topDivName}-${rangeType}`){
+            range_buttons[i].style.backgroundColor = 'yellow';
+        }
+        else{
+            range_buttons[i].style.backgroundColor = 'transparent';
+        }
+    }
+}
+
 // calls get_range() in api
 async function get_range(stock_number) {
     const response = await fetch('js-py-api-getRange', {
@@ -113,7 +105,7 @@ async function get_range(stock_number) {
     return data['range'];
 }
 
-// calls change_range() in api
+// calls change_range() in api, updates the ranges in cache
 function change_range(stock_number, new_range) {
 fetch('js-py-api-changeRange', {
     method: 'POST',
@@ -126,7 +118,19 @@ fetch('js-py-api-changeRange', {
         })
     })
     .then(response => response.json())
-    .then(data => {
-        console.log('change_range:', data);
+}
+
+// calls get_stock() in api
+async function get_stock(stock_number) {
+    const response = await fetch('js-py-api-getStock', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            stock_number: stock_number
+        })
     })
+    const data = await response.json();
+    return data['stock'];
 }

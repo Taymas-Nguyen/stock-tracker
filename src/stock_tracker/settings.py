@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'yahoo',
     'csv_page', 
     'templates',
+    'api'
 ]
 
 MIDDLEWARE = [

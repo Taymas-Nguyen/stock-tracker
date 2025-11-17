@@ -98,7 +98,7 @@ function getTopDiv(element){
     return topLevelDiv.id;
 }
 
-// calls get_range() in /data_page/views.py
+// calls get_range() in api
 async function get_range(stock_number) {
     const response = await fetch('js-py-api-getRange', {
         method: 'POST',
@@ -113,7 +113,7 @@ async function get_range(stock_number) {
     return data['range'];
 }
 
-// calls change_range() in /data_page/views.py
+// calls change_range() in api
 function change_range(stock_number, new_range) {
 fetch('js-py-api-changeRange', {
     method: 'POST',

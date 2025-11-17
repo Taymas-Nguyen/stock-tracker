@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('home_page.urls')),
     path('data_page/', include('data_page.urls')),
     path('data_page/', include('csv_page.urls')), 
+    path('data_page/', include('api.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

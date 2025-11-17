@@ -4,8 +4,6 @@ from .forms import search_form
 from csv_page.views import csv_page
 from cache import form_stock, form_ranges, cache_stock_max, cache_stock_minute
 import re
-from django.views.decorators.csrf import csrf_exempt
-import json 
 
 with open('./static/data_page.js', 'r') as file:
     for line in file:
@@ -61,17 +59,3 @@ def data_page(request):
         context[form_name] = form_dict[form_name]
     context['ticker_name'] = request.session['ticker']
     return render(request, "data_page.html", context)
-
-@csrf_exempt
-def get_range(request):
-    try:
-        return JsonResponse({'range' : form_ranges[json.loads(request.body).get('stock_number')]})
-    except:
-        return JsonResponse({'range' : None})
-    
-@csrf_exempt
-def change_range(request = None):
-    form_name = json.loads(request.body).get('stock_number')
-    new_range = json.loads(request.body).get('new_range')
-    form_ranges[form_name] = new_range
-    return JsonResponse({'reponse': new_range})

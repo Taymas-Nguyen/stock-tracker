@@ -2,7 +2,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .forms import search_form
 from csv_page.views import csv_page
-from cache import form_stock, form_ranges, cache_stock_max, cache_stock_minute
+from cache import form_stock, form_ranges, cache_stock_max, cache_stock_minute, stock_visibility
 import re
 
 with open('./static/data_page.js', 'r') as file:
@@ -24,16 +24,19 @@ def data_page(request):
             form_stock[i] = ''
 
 
-    # if user searches for stock from home page
+    # if user searches for stock from home page or refreshes page
     if request.method == "GET":
+        print("ANISDIFSDFDSIFFFIDSFISDFDSUIFNSDFI")
         form_ranges.clear()
         cache_stock_max.clear()
         cache_stock_minute.clear()
 
-        for i in form_as_string:
-            if i != 'form0':
-                form_stock[i] = ''
+        for i in range(amount_of_forms):
+            if i != 0:
+                form_stock[f"form{i}"] = ''
+                stock_visibility[f"stock{i}"] = 'invisible'
 
+        stock_visibility["stock0"] = 'show'
         mutable_data = form_dict['form0'].data.copy()
         mutable_data['ticker'] = form_stock['form0']
         form_dict['form0'] = search_form(mutable_data)
@@ -43,6 +46,9 @@ def data_page(request):
         request.session['ticker'] =  request.POST['ticker']
         for form_name in form_as_string:
             if form_name in request.POST:
+                stock_number = f"stock{int(re.search(r"\d+", form_name).group())}"
+                stock_visibility[stock_number] = 'show'
+
                 form_stock[form_name] = request.session['ticker']
                 mutable_data = form_dict[form_name].data.copy()
                 mutable_data['ticker'] = request.session['ticker'] 

@@ -17,7 +17,7 @@ def createGraph(form, number):
     "form":form, 
     "formname":f"form{number}",
     "name":f"stock{number}",
-    "deleteGraph":f"stock{number}-deleteGraph",
+    "hideGraph":f"stock{number}-hideGraph",
     "search_box":f"stock{number}-search_box",
     "button_and_graph":f"stock{number}-button_and_graph",
     "tooltip":f"stock{number}-tooltip",

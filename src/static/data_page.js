@@ -7,6 +7,11 @@ for( i=0; i < amount_of_forms; i++ )
     all_graphs.push(`stock${i}`)
 }
 
+// visibility statuses for cache
+show = 'show' // show everything and the hide button
+invisible = 'invisible' // show nothing
+partial_show = 'partial_show' // show only filled out input field with the show button
+partial_invisible = 'partial_invisible' // show only empty input field with no buttons
 
 // on page load
 document.addEventListener('DOMContentLoaded', function() {
@@ -19,12 +24,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Iterate through all graphs
     for (const stock of all_graphs) {
-        // if graph has stock then show, else hide all elements
-        get_stock(stock).then(data =>{
+
+        // if no visibility then default is invisible, else preserve visibility
+        get_visibility(stock).then(data =>{
             if (data == null){
+                change_visibility(stock, invisible);
+            }
+        });
+
+        get_visibility(stock).then(data =>{
+            console.log(stock, data);
+            if (data == invisible){
                 document.querySelector(`#${stock}`).style.display = 'none';
+            }else if (data == partial_invisible){
+                document.querySelector(`#${stock}`).style.display = 'inline';
+                document.querySelector(`#${stock}-button_and_graph`).style.display = 'none';
+                document.querySelector(`#${stock}-hideGraph`).style.display = 'none';
             }else{
-                console.log("asd");
                 get_range(stock).then(data => {
                     topDiv = document.getElementById(stock);
                     rangeType = data == null ? "Max" : data;
@@ -35,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+
 });
 
 // on ANY range button press, get top level parent (i.e stock0, stock1, ect), modify only that div
@@ -51,14 +69,27 @@ function rangeClicked(element, ticker_name) {
     drawLine('red', rangeType, topDivName);
 }
 
-// delete entire graph, all graphs beneath should move up
-function deleteGraph(element){
+// hides entire div except the input field, all graphs beneath should move up, replace hide button with show button
+function hideGraph(element){
     topDivName = getTopDiv(element);
 }
 
-// add new graph at the bottom
+// reveals entire div, replace show button with hide button
+function showGraph(element){
+
+}
+
+// add new graph at the bottom, only show the input field, hide hide/show button
 function addGraph(element){
-    topDivName = getTopDiv(element);
+    for (const stock of all_graphs){
+        if (document.querySelector(`#${stock}`).style.display == 'none'){
+            change_visibility(stock, partial_invisible);
+            document.querySelector(`#${stock}`).style.display = 'inline';
+            document.querySelector(`#${stock}-button_and_graph`).style.display = 'none';
+            document.querySelector(`#${stock}-hideGraph`).style.display = 'none';
+            return;
+        }
+    }
 }
 
 function getTopDiv(element){
@@ -88,49 +119,4 @@ function loadingGraph(topDiv, topDivName, rangeType){
             range_buttons[i].style.backgroundColor = 'transparent';
         }
     }
-}
-
-// calls get_range() in api
-async function get_range(stock_number) {
-    const response = await fetch('js-py-api-getRange', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            stock_number: stock_number
-        })
-    })
-    const data = await response.json();
-    return data['range'];
-}
-
-// calls change_range() in api, updates the ranges in cache
-function change_range(stock_number, new_range) {
-fetch('js-py-api-changeRange', {
-    method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            stock_number: stock_number,
-            new_range: new_range
-        })
-    })
-    .then(response => response.json())
-}
-
-// calls get_stock() in api
-async function get_stock(stock_number) {
-    const response = await fetch('js-py-api-getStock', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            stock_number: stock_number
-        })
-    })
-    const data = await response.json();
-    return data['stock'];
 }

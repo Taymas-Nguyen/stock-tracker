@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import search_form
 from data_page.views import data_page
-from cache import cache_stock_max, cache_stock_minute, form_stock
+from cache import cache_stock_max, cache_stock_minute, form_stock, stock_visibility
 from csv_page.views import csv_page
 
 def home_page(request):    
@@ -19,6 +19,7 @@ def home_page(request):
         form0 = search_form(request.POST)
         request.session['ticker'] = request.POST['ticker']
         form_stock['form0'] = request.POST['ticker']
+        stock_visibility['stock0'] = 'show'
 
         csv_page(request, 'max', 'form0')
         csv_page(request, 'minute', 'form0')

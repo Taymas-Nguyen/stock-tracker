@@ -8,3 +8,6 @@ form_stock = {}
 # save ranges when searching for a new stock
 # key = stock number, value = range
 form_ranges = {}
+
+# key = stock number, value = different visibiliy statuses
+stock_visibility = {}

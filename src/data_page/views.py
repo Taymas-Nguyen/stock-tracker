@@ -26,7 +26,6 @@ def data_page(request):
 
     # if user searches for stock from home page or refreshes page
     if request.method == "GET":
-        print("ANISDIFSDFDSIFFFIDSFISDFDSUIFNSDFI")
         form_ranges.clear()
         cache_stock_max.clear()
         cache_stock_minute.clear()
@@ -36,7 +35,9 @@ def data_page(request):
                 form_stock[f"form{i}"] = ''
                 stock_visibility[f"stock{i}"] = 'invisible'
 
-        stock_visibility["stock0"] = 'show'
+        # edge case for when user directly goes to data page without going through home page
+        stock_visibility["stock0"] = 'show' if form_stock['form0'] != "" else 'partial_invisible'
+
         mutable_data = form_dict['form0'].data.copy()
         mutable_data['ticker'] = form_stock['form0']
         form_dict['form0'] = search_form(mutable_data)

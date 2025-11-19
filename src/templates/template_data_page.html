@@ -1,91 +1,106 @@
-<div id = {{name}} style = "margin-bottom: 150px;">
-        <div id = '{{search_box}}' style = "margin-bottom: -20px;"> 
-            <button id="{{hideGraph}}" onclick= 'hideGraph(this)' style="
-                background-image: url('/static/delete.jpg');
-                background-size: cover;  
-                background-position: center; 
-                overflow: hidden;
-                background-repeat: no-repeat; 
-                width: 33px;
-                height: 33px;
-                border-radius: 100%;
-                margin: 0; 
-                padding: 0;
-                top: 33;
-                left: 370;
-                position: relative; 
-                background-color: 
-                transparent;
-                display: inline-block"
-                >
-            </button>
-            <div class="search_box_background" style = "
-                width: 350px; 
-                height: 30px; 
-                margin-left: 10px;
-                background-color: white; 
-                border: 2px solid gray; 
-                position: relative; 
-                border-radius: 100px;
-                overflow-y: auto;">
-            </div>
-            <form method="post" autocomplete="off" spellcheck = 'false'>
-                {%csrf_token%} 
-                {{form}}
-                <button name="{{formname}}" style = "display: none"></button>
-            </form>
+<div id = {{name}} style = "
+        margin-bottom: 130px; 
+        position: relative;
+        width: 1250;
+        height: 450; 
+        resize: both;
+        overflow: auto;
+        ">
+    <div id = '{{search_box}}' style = "
+            display: flex;
+            width: 312.5;
+            height: 31.5;
+            min-width: 20%;
+            min-height: 4%;
+            margin-bottom: -20px; 
+            left: 12px;
+            position: absolute;
+            "> 
+        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Day}}" >1 Day</button>
         </div>
-    <div id = "{{button_and_graph}}">
-        <div id = "{{tooltip}}"></div>
-        <div id = "{{range_buttons}}" style = "
+        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Days}}" >7 Days</button>
+        </div>
+        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Mont}}" >1 Month</button>
+        </div>
+        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{6Months}}" >6 Months</button>
+        </div>
+        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{YearToDate}}" >Year To Date</button>
+        </div>
+        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Year}}">1 Year</button>
+        </div>
+        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Years}}">5 Years</button>
+        </div>
+        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{Max}}">Max</button>
+        </div>
+        <button id="{{hideGraph}}" onclick= 'hideGraph(this)' style="
+            background-image: url('/static/delete.jpg');
+            background-size: cover;  
+            background-position: center; 
+            overflow: hidden;
+            background-repeat: no-repeat; 
+            width: 33px;
+            height: 33px;
+            border-radius: 100%;
+            margin: 0; 
+            padding: 0;
+            top: 0;
+            left: 370;
+            position: absolute; 
+            background-color: 
+            transparent;
+            display: inline-block"
+            >
+        </button>
+        <div class="search_box_background" style = "
+            width: 100%; 
+            height: 100%; 
+            margin-left: 10px;
+            background-color: white; 
+            border: 2px solid gray; 
+            position: absolute; 
+            border-radius: 100px;
+            overflow-y: auto;">
+        </div>
+        <form method="post" autocomplete="off" spellcheck = 'false' style = "width: 100px;">
+            {%csrf_token%} 
+            {{form.ticker}}
+            <button name="{{formname}}" style = "display: none"></button>
+        </form>
+    </div>
+    <div id = "{{graph_container}}" style = "
                 margin-left: 1150px;
                 margin-top:  20px;
                 color: red;
-                ">  
-            <div>
-                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Day}}" >1 Day</button>
-            </div>
-            <div>   
-                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Days}}">7 Days</button>
-            </div>
-            <div>      
-                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Month}}">1 Month</button>
-            </div>
-            <div>      
-                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{6Months}}">6 Months</button>
-            </div>
-            <div>      
-                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{YearToDate}}">Year to Date</button>
-            </div>
-            <div>      
-                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Year}}">1 Year</button>
-            </div>
-            <div>      
-                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Years}}">5 Years</button>
-            </div>
-            <div>      
-                <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{Max}}">Max</button>
-            </div>
-            <div>
-                <div id = {{line_graph}} style = "
-                        margin-top: -250px;
-                        left: -1170;
-                        top: 65;
-                        position: relative;
-                        "> 
-                    <div id = {{loading_graph}} style = "
-                        background-color: black;
-                        width: 1120;
-                        height: 390;
-                        left: 40px;
-                        position: absolute;
-                        text-align: center;
-                        vertical-align: middle;
-                        line-height: 400px; 
-                        display: inline;
-                        ">   
-                        <h1 id = "{{loading_words}}" style = "color: white;" >  Loading ... {{ticker_name}} ...  </h1>
-                    </div>
+                position: absolute
+                ">
+        <div id = "{{tooltip}}"></div>
+        <div>
+            <div id = {{line_graph}} style = "
+                    margin-top: -250px;
+                    left: -1170;
+                    top: 280;
+                    position: absolute;
+                    "> 
+                <div id = {{loading_graph}} style = "
+                    background-color: black;
+                    width: 1120;
+                    height: 390;
+                    left: 40px;
+                    position: absolute;
+                    text-align: center;
+                    vertical-align: middle;
+                    line-height: 400px; 
+                    display: inline;
+                    ">   
+                    <h1 id = "{{loading_words}}" style = "color: white;" >  Loading ... {{ticker_name}} ...  </h1>
                 </div>
             </div>
         </div>

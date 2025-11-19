@@ -88,9 +88,10 @@ function drawLine(color, range, topDivName){
   }
 
   // set the dimensions and margins of the graph
+  var scale = 1;
   const margin = {top: 10, right: 30, bottom: 30, left: 60};
-  const width = 1150 - margin.left - margin.right;
-  const height = 400 - margin.top - margin.bottom;
+  const width = 1150/scale - margin.left - margin.right;
+  const height = 400/scale - margin.top - margin.bottom;
 
   // append the svg object to line graph of top div with unique id
   const svg = d3

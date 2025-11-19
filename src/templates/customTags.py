@@ -19,7 +19,7 @@ def createGraph(form, number):
     "name":f"stock{number}",
     "hideGraph":f"stock{number}-hideGraph",
     "search_box":f"stock{number}-search_box",
-    "button_and_graph":f"stock{number}-button_and_graph",
+    "graph_container":f"stock{number}-graph_container",
     "tooltip":f"stock{number}-tooltip",
     "range_buttons":f"stock{number}-range_buttons",
     "1Day":f"stock{number}-1Day",

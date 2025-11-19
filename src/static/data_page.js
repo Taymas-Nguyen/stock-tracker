@@ -35,9 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
         get_visibility(stock).then(data =>{
             if (data == invisible){
                 document.querySelector(`#${stock}`).style.display = 'none';
+
             }else if (data == partial_invisible){
+                // hide all range buttons
+                var range_buttons = document.querySelector(`#${stock}`).querySelectorAll('button');
+                for( i=0; i< range_buttons.length; i++ )
+                {
+                    range_buttons[i].style.display = 'none';
+                }
                 document.querySelector(`#${stock}`).style.display = 'inline';
-                document.querySelector(`#${stock}-graph_container`).style.display = 'none';
+                document.querySelector(`#${stock}-line_graph`).style.display = 'none';
                 document.querySelector(`#${stock}-hideGraph`).style.display = 'none';
             }else{
                 get_range(stock).then(data => {
@@ -87,13 +94,12 @@ function addGraph(element){
             var range_buttons = document.querySelector(`#${stock}`).querySelectorAll('button');
             for( i=0; i< range_buttons.length; i++ )
             {
-                range_buttons[i].disabled = true;
                 range_buttons[i].style.display = 'none';
             }
             
             change_visibility(stock, partial_invisible);
             document.querySelector(`#${stock}`).style.display = 'inline';
-            document.querySelector(`#${stock}-graph_container`).style.display = 'none';
+            document.querySelector(`#${stock}-line_graph`).style.display = 'none';
             document.querySelector(`#${stock}-hideGraph`).style.display = 'none';
             return;
         }

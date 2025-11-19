@@ -1,10 +1,10 @@
 <div id = {{name}} style = "
         margin-bottom: 130px; 
         position: relative;
-        width: 1250;
-        height: 450; 
-        resize: both;
-        overflow: auto;
+        width: 1450;
+        height: 550; 
+        /* resize: both;
+        overflow: hidden; */
         ">
     <div id = '{{search_box}}' style = "
             display: flex;
@@ -75,34 +75,29 @@
             <button name="{{formname}}" style = "display: none"></button>
         </form>
     </div>
-    <div id = "{{graph_container}}" style = "
-                margin-left: 1150px;
-                margin-top:  20px;
-                color: red;
-                position: absolute
-                ">
-        <div id = "{{tooltip}}"></div>
-        <div>
-            <div id = {{line_graph}} style = "
-                    margin-top: -250px;
-                    left: -1170;
-                    top: 280;
-                    position: absolute;
-                    "> 
-                <div id = {{loading_graph}} style = "
-                    background-color: black;
-                    width: 1120;
-                    height: 390;
-                    left: 40px;
-                    position: absolute;
-                    text-align: center;
-                    vertical-align: middle;
-                    line-height: 400px; 
-                    display: inline;
-                    ">   
-                    <h1 id = "{{loading_words}}" style = "color: white;" >  Loading ... {{ticker_name}} ...  </h1>
-                </div>
-            </div>
+    <div id = {{line_graph}} style = "
+        top: 40px;
+        left: 50px;
+        min-width: 100px;
+        height: 100%;
+        width: 100%;
+        color: red;
+        position: absolute;
+        resize: horizontal;
+        overflow: hidden;
+        ">
+        <div id = {{loading_graph}} style = "
+            background-color: black;
+            width: 1120;
+            height: 390;
+            left: 40px;
+            position: absolute;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 400px; 
+            display: inline;
+            ">   
+            <h1 id = "{{loading_words}}" style = "color: white;" >  Loading ... {{ticker_name}} ...  </h1>
         </div>
     </div>
 </div>

@@ -90,16 +90,19 @@ function drawLine(color, range, topDivName){
   // set the dimensions and margins of the graph
   var scale = 1;
   const margin = {top: 10, right: 30, bottom: 30, left: 60};
-  const width = 1150/scale - margin.left - margin.right;
-  const height = 400/scale - margin.top - margin.bottom;
+  const width = 1150/scale
+  const height = 400/scale
 
   // append the svg object to line graph of top div with unique id
   const svg = d3
     .select(`#${topDivName}-line_graph`)
     .append("svg")
     .attr("id", `${topDivName}-svgid`)
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("viewBox", "0 0 1150 450")
+    // .attr("width", width)
+    // .attr("height", height + 100)
+    // .attr("width", "100%")
+    // .attr("height", "100%")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);  
 

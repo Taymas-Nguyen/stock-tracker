@@ -98,13 +98,22 @@ function drawLine(color, range, topDivName){
     .select(`#${topDivName}-line_graph`)
     .append("svg")
     .attr("id", `${topDivName}-svgid`)
-    .attr("viewBox", "0 0 1150 450")
+    .attr("style", "position: relative; right: 0px;")
+    .attr("viewBox", "0 0 1180 475")
+    // .attr("preserveAspectRatio", "none")
     // .attr("width", width)
-    // .attr("height", height + 100)
+    // .attr("height", height)
+    .attr("height", "100%")
     // .attr("width", "100%")
-    // .attr("height", "100%")
+    // .attr("width", "auto")
+
+
+  
+
     .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);  
+    .attr("id", `${topDivName}-g`)
+    .attr("transform", `translate(35,45)`);  
+    
 
 
   //Read the data

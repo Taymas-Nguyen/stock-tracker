@@ -48,6 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelector(`#${stock}-hideGraph`).style.display = 'none';
             }else{
                 get_range(stock).then(data => {
+                    // enable all buttons again
+                    var range_buttons = document.querySelector(`#${stock}`).querySelectorAll('button');
+                    for( i=0; i< range_buttons.length; i++ )
+                    {
+                        range_buttons[i].disabled = false;
+                    }
                     topDiv = document.getElementById(stock);
                     rangeType = data == null ? "Max" : data;
         

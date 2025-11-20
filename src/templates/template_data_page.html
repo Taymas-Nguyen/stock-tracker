@@ -1,43 +1,46 @@
 <div id = {{name}} style = "
-        margin-bottom: 130px; 
         position: relative;
-        width: 1450;
-        height: 550; 
-        /* resize: both;
-        overflow: hidden; */
+        /* width: 1080px; */
+        width: auto;
+        height: 502;
+        max-height: 1480px;
+        resize: vertical;
+        aspect-ratio: 1260 / 502;
+        overflow: hidden;
         ">
     <div id = '{{search_box}}' style = "
             display: flex;
-            width: 312.5;
+            width: 100%;
             height: 31.5;
-            min-width: 20%;
+            min-width: 0%;
             min-height: 4%;
-            margin-bottom: -20px; 
+            margin-top: 0; 
             left: 12px;
-            position: absolute;
+            position: relative;
+            overflow: visible;
             "> 
-        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
-            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Day}}" >1 Day</button>
+        <div style="display:flex; align-items: center; position: relative; left: 25%; width: auto; white-space: nowrap; z-index: 1;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Day}}" >1D</button>
         </div>
-        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
-            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Days}}" >7 Days</button>
+        <div style="display:flex; align-items: center; position: relative; left: 25%; width: auto; white-space: nowrap; z-index: 1;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Days}}" >7D</button>
         </div>
-        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
-            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Mont}}" >1 Month</button>
+        <div style="display:flex; align-items: center; position: relative; left: 25%; width: auto; white-space: nowrap; z-index: 1;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Month}}" >1M</button>
         </div>
-        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
-            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{6Months}}" >6 Months</button>
+        <div style="display:flex; align-items: center; position: relative; left: 25%; width: auto; white-space: nowrap; z-index: 1;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{6Months}}" >6M</button>
         </div>
-        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
-            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{YearToDate}}" >Year To Date</button>
+        <div style="display:flex; align-items: center; position: relative; left: 25%; width: auto; white-space: nowrap; z-index: 1;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{YearToDate}}" >YTD</button>
         </div>
-        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
-            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Year}}">1 Year</button>
+        <div style="display:flex; align-items: center; position: relative; left: 25%; width: auto; white-space: nowrap; z-index: 1;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{1Year}}">1Y</button>
         </div>
-        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
-            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Years}}">5 Years</button>
+        <div style="display:flex; align-items: center; position: relative; left: 25%; width: auto; white-space: nowrap; z-index: 1;">
+            <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{5Years}}">5Y</button>
         </div>
-        <div style="display:flex; align-items: center; position: relative; left: 450px; width: 100%; white-space: nowrap;">
+        <div style="display:flex; align-items: center; position: relative; left: 25%; width: auto; white-space: nowrap; z-index: 1;">
             <button onclick= 'rangeClicked(this, "{{ticker_name}}" )' id="{{Max}}">Max</button>
         </div>
         <button id="{{hideGraph}}" onclick= 'hideGraph(this)' style="
@@ -52,39 +55,42 @@
             margin: 0; 
             padding: 0;
             top: 0;
-            left: 370;
+            left: 17%;
             position: absolute; 
             background-color: 
             transparent;
-            display: inline-block"
+            display: inline-block;
+            z-index: 1;"
             >
         </button>
         <div class="search_box_background" style = "
-            width: 100%; 
+            width: 15%; 
             height: 100%; 
             margin-left: 10px;
             background-color: white; 
             border: 2px solid gray; 
             position: absolute; 
             border-radius: 100px;
-            overflow-y: auto;">
+            overflow-y: auto;
+            z-index: 1;">
         </div>
-        <form method="post" autocomplete="off" spellcheck = 'false' style = "width: 100px;">
+        <form method="post" autocomplete="off" spellcheck = 'false' style = "width: 100px; z-index: 1;">
             {%csrf_token%} 
             {{form.ticker}}
-            <button name="{{formname}}" style = "display: none"></button>
+            <button name="{{formname}}" style = "display: none; z-index: 1"></button>
         </form>
     </div>
     <div id = {{line_graph}} style = "
-        top: 40px;
-        left: 50px;
+        top: 0px;
+        left: 0px;
         min-width: 100px;
         height: 100%;
-        width: 100%;
+        max-height: 1480px;
+        width: auto;
         color: red;
         position: absolute;
-        resize: horizontal;
-        overflow: hidden;
+        /* resize: vertical; */
+        overflow: visible;
         ">
         <div id = {{loading_graph}} style = "
             background-color: black;

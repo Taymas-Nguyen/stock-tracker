@@ -23,7 +23,7 @@ class search_form(forms.ModelForm):
                 outline: none;
                 background: transparent;
                 border-radius: 10px;
-                
+                z-index: 1;
                 """,
             }
         )

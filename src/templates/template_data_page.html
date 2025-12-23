@@ -2,7 +2,7 @@
         position: relative;
         /* width: 1080px; */
         width: auto;
-        height: 363;
+        height: 560;
         max-height: 1480px;
         min-height: 200px;
         resize: vertical;
@@ -55,7 +55,7 @@
             border-radius: 100%;
             margin: 0; 
             padding: 0;
-            top: 0;
+            top: 5%;
             left: 18%;
             position: absolute; 
             background-color: 
@@ -65,20 +65,29 @@
             >
         </button>
         <div class="search_box_background" style = "
-            width: 15%; 
-            height: 100%; 
+            width: 11%; 
+            height: 70%; 
             margin-left: 10px;
             background-color: white; 
             border: 2px solid gray; 
             position: absolute; 
             border-radius: 100px;
             overflow-y: auto;
+            top: 10%;
             z-index: 1;">
         </div>
-        <form method="post" autocomplete="off" spellcheck = 'false' style = "width: 100px; z-index: 1;">
+        <form method="post" autocomplete="off" spellcheck = 'false' onsubmit = 'checkEmpty()' novalidate>
             {%csrf_token%} 
             {{form.ticker}}
             <button name="{{formname}}" style = "display: none; z-index: 1"></button>
+            <script>
+                function checkEmpty() {
+                    var input = document.getElementById('id_ticker').value;
+                    if (input == "" || input == null){
+                        event.preventDefault();
+                    }
+                }
+            </script>
         </form>
     </div>
     <div id = {{line_graph}} style = "

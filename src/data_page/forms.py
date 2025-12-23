@@ -8,12 +8,12 @@ class search_form(forms.ModelForm):
         label = '',
         widget = forms.TextInput(
             attrs = {
-                'placeholder' : 'Enter ticker (meta, aapl)',
+                'placeholder' : 'ticker (meta, aapl)',
                 'cols': 20, 
                 'rows': 1,
                 # equivalent to css styling except for forms
                 'style': """
-                font-size: 25; 
+                font-size: 17; 
                 margin-left: 15px;
                 left: 0;
                 pointer-event: none;
@@ -22,7 +22,9 @@ class search_form(forms.ModelForm):
                 outline: none;
                 background: transparent;
                 border-radius: 10px;
-                
+                height: 100%;
+                width: 10%;
+                z-index: 1;
                 """,
             }
         )

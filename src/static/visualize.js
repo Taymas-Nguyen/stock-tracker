@@ -112,7 +112,7 @@ function drawLine(color, range, topDivName){
 
     .append("g")
     .attr("id", `${topDivName}-g`)
-    .attr("transform", `translate(35,45)`);  
+    .attr("transform", `translate(35,55)`);  
     
 
 

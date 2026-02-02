@@ -30,10 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data == null){
                 change_visibility(stock, invisible);
             }
-        });
 
-        get_visibility(stock).then(data =>{
-            if (data == invisible){
+            if (data == invisible || data == null){
                 document.querySelector(`#${stock}`).style.display = 'none';
 
             }else if (data == partial_invisible){
